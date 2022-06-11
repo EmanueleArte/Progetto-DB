@@ -24,7 +24,7 @@
   ?>
 
   <div class="container-fluid pt-3">
-    <!-- intestazione -->
+    <!-- BOTTONI -->
     <div class="row justify-content-center">
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
       <button type="button" class="btn btn-outline-dark" onclick="location.href='info.php'">Info</button>

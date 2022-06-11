@@ -70,7 +70,7 @@
                 $classLike="liked";
               }
               echo '<p class="">
-                      <p id="nLike" class="'. $classLike .'">'. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3" onclick="addLike()"></i></p>
+                      <p id="nLike" class="'. $classLike .'">'. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3" onclick="addLikeVideo(\'nLike\')"></i></p>
                       <p id="nVis">'. $vis .' <i class="fa fa-eye"></i></p>
                     </p>';
             }

@@ -21,7 +21,7 @@
 
   <!-- spazio home -->
   <div class="container-fluid pt-3">
-    <!-- intestazione -->
+    <!-- intestazione (BOTTONI) -->
     <div class="row justify-content-center">
       <?php 
         if($canale) {
@@ -30,37 +30,59 @@
       ?>
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='info.php'">Info</button>
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='cronologia.php'">Cronologia</button>
+      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='video_piaciuti.php'">Video piaciuti</button>
       <button type="button" class="btn btn-outline-dark" onclick="location.href='logout.php'">Logout</button>
     </div>
     <div class="row justify-content-center">
       <div id="homePosts" class="col-10">
         <h2 class="titleText mt-3">Post scritti</h2>
         <div id="postScritti" class="row">
-        
+        <?php
+          // Dati dei post
+          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount ORDER BY DataPubblicazione DESC LIMIT 4";
+          $query=$db->prepare($sql);
+          $query->execute();
+          $ris=$query->fetchAll();
+          foreach($ris as $row) {
+            echo '<div class="card m-3" style="width: 16rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">'. $row["Titolo"] .'</h5>
+                      <p class="card-text">
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $row["Username"] .'</small><br>
+                        '. $row["TestoPost"] .'<br>
+                        <!-- '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up"></i> -->
+                      </p>
+                    </div>
+                  </div>';
+          }
+        ?>
         </div>
         <h2 class="titleText mt-3">Video</h2>
         <div id="postVideo" class="row">
         <?php
           // Dati del video
-          $sql="SELECT * FROM Video LIMIT 10";
+          $sql="SELECT * FROM Video ORDER BY DataPubblicazione DESC LIMIT 10";
           $query=$db->prepare($sql);
           $query->execute();
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             // Dati eventuale visualizzazione del video da parte dell'utente attuale
-            $sql="SELECT * FROM Video v JOIN Visualizzazioni vis ON v.IdVideo=vis.IdVideo WHERE vis.IdAccount=? AND vis.IdVideo=?";
+            $sql="SELECT * FROM Video v, Visualizzazioni vis, Accounts a WHERE v.IdVideo=vis.IdVideo AND a.IdAccount=vis.IdAccount AND vis.IdAccount=? AND vis.IdVideo=?";
             $query=$db->prepare($sql);
             $dati=array($_SESSION["loginID"], $row["IdVideo"]);
             $query->execute($dati);
             $risVis=$query->fetchAll();
             $tempoVis=-1;
+            $creator;
             foreach($risVis as $vis) {
               $tempoVis=$vis["TempoVisualizzazione"];
+              $creator=$vis["Username"];
             }
-            echo '<div class="card m-3" style="width: 18rem;">
+            echo '<div class="card m-3" style="width: 16rem;">
                     <div class="card-body" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
                       <h5 class="card-title">'. $row["Titolo"] .'</h5>
                       <p class="card-text">
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $creator .'</small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
                       </p>

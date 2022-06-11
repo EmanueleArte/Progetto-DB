@@ -8,9 +8,11 @@ function refillFormReg(){
 }
 
 function refillFormLogin(){
-  document.getElementById("usernameLogin").value=getCookie("username");
-  document.getElementById("pwLogin").value=getCookie("pw");
-  document.getElementById("pwLogin").classList.add("is-invalid");
+  if(getCookie("pw")!==undefined) {
+    document.getElementById("usernameLogin").value=getCookie("username");
+    document.getElementById("pwLogin").value=getCookie("pw");
+    document.getElementById("pwLogin").classList.add("is-invalid");
+  }
   //deleteCookie("username");
   //deleteCookie("pw");
 }

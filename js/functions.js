@@ -85,8 +85,8 @@ function onYouTubeIframeAPI() {
 }
 
 // Salva il video tra i piaciuti
-function refreshLike() {
-  var likes=document.getElementById("nLike");
+function refreshLike(idLike) {
+  var likes=document.getElementById(idLike);
   var array=likes.innerHTML.split(" ");
   if(!likes.classList.contains("liked")) {
     array[0]=parseInt(array[0])+1;
@@ -99,14 +99,23 @@ function refreshLike() {
   }
 }
 
-// Salva il video tra i piaciuti
-function addLike() {
-  const videoID = urlParams.get('id');
-  refreshLike();
+// Mette like a un post scritto
+/*function addLikeScritto(idLike, postID) {
+  refreshLike(idLike);
   var formData = new FormData();
-  formData.append("idVideo", videoID);
-  postData('like.php', formData)
+  formData.append("idPost", postID);
+  postData('likePost.php', formData)
   .then((res)=>{
   });
-  
+}*/
+
+// Salva il video tra i piaciuti
+function addLikeVideo(idLike) {
+  const videoID = urlParams.get('id');
+  refreshLike(idLike);
+  var formData = new FormData();
+  formData.append("idVideo", videoID);
+  postData('likeVideo.php', formData)
+  .then((res)=>{
+  });
 }

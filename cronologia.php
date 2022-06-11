@@ -46,7 +46,7 @@
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             // Dati eventuale visualizzazione del video da parte dell'utente attuale
-            $sql="SELECT * FROM Video v JOIN Visualizzazioni vis ON v.IdVideo=vis.IdVideo WHERE vis.IdAccount=? AND vis.IdVideo=?";
+            $sql="SELECT * FROM Video v, Visualizzazioni vis, Accounts a WHERE v.IdVideo=vis.IdVideo AND a.IdAccount=vis.IdAccount AND vis.IdAccount=? AND vis.IdVideo=?";
             $query=$db->prepare($sql);
             $dati=array($_SESSION["loginID"], $row["IdVideo"]);
             $query->execute($dati);
@@ -54,11 +54,13 @@
             $tempoVis=-1;
             foreach($risVis as $vis) {
               $tempoVis=$vis["TempoVisualizzazione"];
+              $creator=$vis["Username"];
             }
-            echo '<div class="card m-3" style="width: 18rem;">
+            echo '<div class="card m-3" style="width: 16rem;">
                     <div class="card-body" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
                       <h5 class="card-title">'. $row["Titolo"] .'</h5>
                       <p class="card-text">
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $creator .'</small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
                       </p>
