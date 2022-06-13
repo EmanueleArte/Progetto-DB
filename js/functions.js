@@ -99,23 +99,11 @@ function refreshLike(idLike) {
   }
 }
 
-// Mette like a un post scritto
-/*function addLikeScritto(idLike, postID) {
-  refreshLike(idLike);
-  var formData = new FormData();
-  formData.append("idPost", postID);
-  postData('likePost.php', formData)
-  .then((res)=>{
-  });
-}*/
-
 // Salva il video tra i piaciuti
 function addLikeVideo(idLike) {
   const videoID = urlParams.get('id');
   refreshLike(idLike);
   var formData = new FormData();
   formData.append("idVideo", videoID);
-  postData('likeVideo.php', formData)
-  .then((res)=>{
-  });
+  postData('likeVideo.php', formData);
 }
