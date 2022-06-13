@@ -45,7 +45,8 @@
                 <div class="mb-2">Canale: '. $canaleStr .'</div>';
           if($canale) {
             echo '<div class="mb-2">Numero iscritti: '. $row["NumeroIscritti"] .'</div>';
-            echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="location.href=\'miei_video.php\'">Miei video</button>';
+            echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2 mr-3" onclick="location.href=\'miei_video.php\'">Miei video</button>';
+            echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="location.href=\'miei_post.php\'">Miei post</button>';
           } else {
             echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="confirmChannel()">Attiva canale</button>';
           }

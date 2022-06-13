@@ -23,43 +23,32 @@
     }
   ?>
 
+  <!-- spazio home -->
   <div class="container-fluid pt-3">
-    <!-- BOTTONI -->
+    <!-- intestazione (BOTTONI) -->
     <div class="row justify-content-center">
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='info.php'">Info</button>
-      <button type="button" class="btn btn-outline-dark" onclick="location.href='home.php'">Home</button>
+      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center">
-      <div class="col-10">
-        <h2 class="titleText mt-3">Miei video</h2>
-        <div id="mieiVideo" class="row">
+      <div id="homePosts" class="col-10">
+        <h2 class="titleText mt-3">Miei post scritti</h2>
+        <div class="row">
         <?php
-          // Dati del video
-          $sql="SELECT * FROM Video WHERE IdAccount=?";
+          // Dati dei post
+          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.IdAccount=? ORDER BY DataPubblicazione DESC";
           $query=$db->prepare($sql);
           $dati=array($_SESSION["loginID"]);
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
-            // Dati eventuale visualizzazione del video da parte dell'utente attuale
-            $sql="SELECT * FROM Video v, Visualizzazioni vis, Accounts a WHERE v.IdVideo=vis.IdVideo AND a.IdAccount=vis.IdAccount AND vis.IdAccount=? AND vis.IdVideo=?";
-            $query=$db->prepare($sql);
-            $dati=array($_SESSION["loginID"], $row["IdVideo"]);
-            $query->execute($dati);
-            $risVis=$query->fetchAll();
-            $tempoVis=-1;
-            $creator;
-            foreach($risVis as $vis) {
-              $tempoVis=$vis["TempoVisualizzazione"];
-              $creator=$vis["Username"];
-            }
             echo '<div class="card m-3" style="width: 16rem;">
-                    <div class="card-body" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
+                    <div class="card-body">
                       <h5 class="card-title">'. $row["Titolo"] .'</h5>
                       <p class="card-text">
-                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $creator .'</small><br>
-                        '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
-                        '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $row["Username"] .'</small><br>
+                        '. $row["TestoPost"] .'<br>
+                        <!-- '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up"></i> -->
                       </p>
                     </div>
                   </div>';

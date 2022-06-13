@@ -17,53 +17,52 @@
     include("check_session.php");
     include("db.php");
     include("check_canale.php");
+
+    if(!isset($_GET["canale"])) {
+        header("Location: home.php");
+    }
   ?>
 
   <!-- spazio home -->
   <div class="container-fluid pt-3">
     <!-- intestazione (BOTTONI) -->
     <div class="row justify-content-center">
-      <?php 
-        if($canale) {
-          echo '<button type="button" class="btn btn-outline-dark mr-3" onclick="location.href=\'create_post.php\'">Crea nuovo post</button>';
-        }
-      ?>
-      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='info.php'">Info</button>
-      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='cronologia.php'">Cronologia</button>
-      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='video_piaciuti.php'">Video piaciuti</button>
-      <button type="button" class="btn btn-outline-dark" onclick="location.href='logout.php'">Logout</button>
+      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center">
-      <div id="homePosts" class="col-10">
+      <div class="col-10">
+        <h1>Canale: <?php echo $_GET["canale"]; ?></h1>
         <h2 class="titleText mt-3">Post scritti</h2>
-        <div id="postScritti" class="row">
-        <?php
+        <div class="row">
+          <?php
           // Dati dei post
-          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount ORDER BY DataPubblicazione DESC LIMIT 4";
+          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.Username=? ORDER BY DataPubblicazione DESC";
           $query=$db->prepare($sql);
-          $query->execute();
+          $dati=array($_GET["canale"]);
+          $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             echo '<div class="card m-3" style="width: 16rem;">
                     <div class="card-body">
                       <h5 class="card-title">'. $row["Titolo"] .'</h5>
                       <p class="card-text">
-                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button></small><br>
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'</small><br>
                         '. $row["TestoPost"] .'<br>
                         <!-- '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up"></i> -->
                       </p>
                     </div>
                   </div>';
           }
-        ?>
+          ?>
         </div>
         <h2 class="titleText mt-3">Video</h2>
         <div id="postVideo" class="row">
-        <?php
+          <?php
           // Dati del video
-          $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount ORDER BY DataPubblicazione DESC LIMIT 12";
+          $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE a.Username=?";
           $query=$db->prepare($sql);
-          $query->execute();
+          $dati=array($_GET["canale"]);
+          $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             // Dati eventuale visualizzazione del video da parte dell'utente attuale
@@ -73,23 +72,23 @@
             $query->execute($dati);
             $risVis=$query->fetchAll();
             $tempoVis=-1;
-            $creator=$row["Username"];
+            $creator;
             foreach($risVis as $vis) {
               $tempoVis=$vis["TempoVisualizzazione"];
-              //$creator=$vis["Username"];
+              $creator=$vis["Username"];
             }
             echo '<div class="card m-3" style="width: 16rem;">
                     <div class="card-body" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
                       <h5 class="card-title">'. $row["Titolo"] .'</h5>
                       <p class="card-text">
-                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: <button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $creator .'\'">'. $creator .'</button></small><br>
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'</small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
                       </p>
                     </div>
                   </div>';
           }
-        ?>
+          ?>
         </div>
       </div>
     </div>
