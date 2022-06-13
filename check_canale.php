@@ -1,7 +1,5 @@
 <?php
-  include("check_session.php");
   include("db.php");
-
   
   $sql="SELECT * FROM Accounts WHERE IdAccount=?";
   $query=$db->prepare($sql);
