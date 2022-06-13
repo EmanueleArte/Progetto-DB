@@ -119,3 +119,10 @@ function addLikeVideo(idLike) {
   .then((res)=>{
   });
 }
+
+// CHAT
+// Invia un messaggio chat salvandolo nel db
+function sendMessageChat(idAccount) {
+    const chatID = urlParams.get('chatID');
+
+}

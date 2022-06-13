@@ -32,6 +32,7 @@
     <div class="row justify-content-center">
       <div class="col-10">
         <h1>Canale: <?php echo $_GET["canale"]; ?></h1>
+        <button type="button" class="btn btn-outline-dark" onclick="location.href='chat.php?username=<?php echo $_GET["canale"]; ?>'">Chat</button>
         <h2 class="titleText mt-3">Post scritti</h2>
         <div class="row">
           <?php
