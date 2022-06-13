@@ -79,6 +79,10 @@ body {
   border-radius: 2rem;
 }
 
+.textarea {
+  border-radius: 1rem;
+}
+
 .mini {
   transform: scale(0.9);
 }

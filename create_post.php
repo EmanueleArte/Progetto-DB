@@ -70,7 +70,7 @@
           </div>
           <!-- TESTO -->
           <div class="input-group pb-3 pt-1">
-            <textarea id="testoPost" class="form-control" name="testo" rows="5" placeholder="Testo post" required></textarea>
+            <textarea id="testoPost" class="form-control textarea" name="testo" rows="5" placeholder="Testo post" required></textarea>
           </div>
           <button id="btnPostS" class="btn btn-primary mt-2">Pubblica</button>
         </form>

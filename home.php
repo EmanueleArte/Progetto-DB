@@ -36,6 +36,16 @@
     </div>
     <div class="row justify-content-center">
       <div id="homePosts" class="col-10">
+        <form method="POST" class="mt-2" style="width: 100%" action="ricerca.php">
+          <!-- RICERCA -->
+          <div class="row align-items-center justify-content-center">
+            <div class="form-group col-7 mt-3">
+              <input type="text" id="cerca" class="form-control" name="cerca" placeholder="Inserisci nome canale o titolo video" required>
+            </div>
+            <button id="bottoneCerca" class="btn btn-primary" value="">Cerca</button>
+          </div>
+        </form>
+        <!-- POST SCRITTI -->
         <h2 class="titleText mt-3">Post scritti</h2>
         <div id="postScritti" class="row">
         <?php
@@ -57,6 +67,7 @@
           }
         ?>
         </div>
+        <!-- VIDEO -->
         <h2 class="titleText mt-3">Video</h2>
         <div id="postVideo" class="row">
         <?php
@@ -79,10 +90,10 @@
               //$creator=$vis["Username"];
             }
             echo '<div class="card card-video m-3" style="width: 16rem;">
-                    <div class="card-body card-video" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
+                    <div class="card-body card-video" onclick="cardOnClick(\''. $row["IdVideo"] .'\',\''. $row["Titolo"] .'\',\''. $row["SorgenteVideo"] .'\',\''. $tempoVis .'\',\''. $creator .'\')">
                       <h5 class="card-title card-video">'. $row["Titolo"] .'</h5>
                       <p class="card-text card-video">
-                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $creator .'\'">'. $creator .'</button></small><br>
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini">'. $creator .'</button></small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
                       </p>
@@ -96,6 +107,15 @@
   </div>
 
   <script src="js/functions.js"></script>
+  <script>
+    function cardOnClick(id, titolo, video, time, creator) {
+      if(event.target.tagName.toLowerCase() == "button"){
+        location.href="canale.php?canale=" + creator;
+      } else {
+        location.href="video.php?id=" + id + "&titolo=" + titolo + "&video=" + video + "&time=" + time;
+      }
+    }
+  </script>
   
   <!-- js per bootstrap -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

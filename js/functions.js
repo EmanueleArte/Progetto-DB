@@ -99,22 +99,13 @@ function refreshLike(idLike) {
   }
 }
 
-// Mette like a un post scritto
-/*function addLikeScritto(idLike, postID) {
-  refreshLike(idLike);
-  var formData = new FormData();
-  formData.append("idPost", postID);
-  postData('likePost.php', formData)
-  .then((res)=>{
-  });
-}*/
-
 // Salva il video tra i piaciuti
 function addLikeVideo(idLike) {
   const videoID = urlParams.get('id');
   refreshLike(idLike);
   var formData = new FormData();
   formData.append("idVideo", videoID);
+<<<<<<< HEAD
   postData('likeVideo.php', formData)
   .then((res)=>{
   });
@@ -126,3 +117,7 @@ function sendMessageChat(idAccount) {
     const chatID = urlParams.get('chatID');
 
 }
+=======
+  postData('likeVideo.php', formData);
+}
+>>>>>>> 02d5b144e5a3d910800bd72b0e05a9950714820e
