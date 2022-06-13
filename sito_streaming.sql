@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.1.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Creato il: Giu 13, 2022 alle 17:46
--- Versione del server: 10.4.24-MariaDB
--- Versione PHP: 8.1.6
+-- Host: localhost:8889
+-- Creato il: Giu 13, 2022 alle 17:19
+-- Versione del server: 5.7.34
+-- Versione PHP: 7.4.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -119,18 +119,20 @@ CREATE TABLE `composizioni_playlists` (
 
 INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (3, 1),
-(3, 3),
-(3, 4),
 (4, 1),
+(5, 1),
+(6, 1),
 (4, 2),
+(6, 2),
+(3, 3),
 (4, 3),
+(3, 4),
 (4, 4),
 (4, 7),
-(4, 8),
-(5, 1),
 (5, 7),
-(5, 8),
 (6, 7),
+(4, 8),
+(5, 8),
 (6, 8);
 
 -- --------------------------------------------------------
@@ -164,8 +166,15 @@ CREATE TABLE `gruppi` (
 CREATE TABLE `iscrizioni` (
   `IdCanale` int(11) NOT NULL,
   `IdIscritto` int(11) NOT NULL,
-  `DataIscrizione` date NOT NULL
+  `DataIscrizione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `iscrizioni`
+--
+
+INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
+(9, 6, '2022-06-13 19:18:15');
 
 -- --------------------------------------------------------
 
@@ -226,7 +235,7 @@ INSERT INTO `playlists` (`IdPlaylist`, `Pubblica`, `NomePlaylist`, `TipoPlaylist
 CREATE TABLE `post_scritti` (
   `IdPost` int(11) NOT NULL,
   `Titolo` varchar(40) NOT NULL,
-  `DataPubblicazione` datetime NOT NULL DEFAULT current_timestamp(),
+  `DataPubblicazione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `TestoPost` varchar(400) NOT NULL,
   `IdAccount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -253,9 +262,9 @@ CREATE TABLE `video` (
   `IdVideo` int(11) NOT NULL,
   `Titolo` varchar(100) NOT NULL,
   `SorgenteVideo` varchar(300) NOT NULL,
-  `DataPubblicazione` datetime NOT NULL DEFAULT current_timestamp(),
-  `NumeroLike` int(11) NOT NULL DEFAULT 0,
-  `NumeroVisualizzazioni` int(11) NOT NULL DEFAULT 0,
+  `DataPubblicazione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `NumeroLike` int(11) NOT NULL DEFAULT '0',
+  `NumeroVisualizzazioni` int(11) NOT NULL DEFAULT '0',
   `IdAccount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -267,7 +276,7 @@ INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, 
 (3, 'Believer - Imagine Dragons', '7wtfhZwyrcc', '2022-06-09 18:50:43', 1, 2, 6),
 (4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 3, 3, 6),
 (5, ' Forget me too - Machine Gun Kelly ft. Halsey', '0tn6nWYNK3Q', '2022-06-13 10:35:37', 1, 2, 6),
-(6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 1, 1, 9);
+(6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 2, 2, 9);
 
 -- --------------------------------------------------------
 
@@ -288,7 +297,8 @@ CREATE TABLE `visualizzazioni` (
 INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) VALUES
 (6, 3, 71),
 (6, 4, 130),
-(6, 5, 0),
+(6, 5, 58),
+(6, 6, 33),
 (7, 3, 80),
 (7, 4, 0),
 (9, 4, 18),

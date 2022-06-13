@@ -36,16 +36,31 @@
       <div class="col-10">
         <h1>Canale: <?php echo $_GET["canale"]; ?></h1>
         <h4>Iscritti: 
-        <?php 
+        <?php
+          $idCanale;
           foreach($ris as $row) {
             echo $row["NumeroIscritti"];
           }
-          // Tasto iscrizione
-          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.Username=? ORDER BY DataPubblicazione DESC";
+          // Ottiene idCanale
+          $sql="SELECT * FROM Accounts WHERE Username=?";
           $query=$db->prepare($sql);
           $dati=array($_GET["canale"]);
           $query->execute($dati);
           $ris=$query->fetchAll();
+          foreach($ris as $row) {
+            $idCanale=$row["IdAccount"];
+          }
+          // Tasto iscrizione
+          $sql="SELECT * FROM Iscrizioni i WHERE IdCanale=? AND IdIscritto=?";
+          $query=$db->prepare($sql);
+          $dati=array($idCanale, $_SESSION["loginID"]);
+          $query->execute($dati);
+          $ris=$query->fetchAll();
+          if(count($ris)>0) {
+            echo '<button type="button" class="btn btn-primary ml-4" onclick="location.href=\'iscrizione.php?canale='. $_GET["canale"] .'&iscrizione=0\'">Iscritto</button>';
+          } else {
+            echo '<button type="button" class="btn btn-outline-primary ml-4" onclick="location.href=\'iscrizione.php?canale='. $_GET["canale"] .'&iscrizione=1\'">Iscriviti</button>';
+          }
         ?>
         </h4>
         <h2 class="titleText mt-3">Post scritti</h2>
