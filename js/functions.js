@@ -110,8 +110,14 @@ function cardOnClick(id, titolo, video, time, creator) {
 
 // CHAT
 // Invia un messaggio chat salvandolo nel db
-function sendMessageChat(idAccount) {
-  const chatID = urlParams.get('chatID');
-  postData('likeVideo.php', formData);
+function sendMessageChat() {
+    const chatID = urlParams.get('chatID');
+    var message = document.getElementById('messageText').value;
+    var formData = new FormData();
+    formData.append("messageText", message);
+    formData.append("chatID", chatID);
+    postData('sendMessage.php', formData)
+        .then((res) => {
+        });
 }
 

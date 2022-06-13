@@ -98,6 +98,9 @@
                   </div>';
           }*/
         ?>
+          <div class="form-group">
+            <input type="text" id="messageText" class="form-control" placeholder="Scrivi un messaggio" required>
+          </div>
         </div>
       </div>
     </div>
