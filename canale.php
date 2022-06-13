@@ -36,7 +36,7 @@
         <div class="row">
           <?php
           // Dati dei post
-          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.Username=? ORDER BY DataPubblicazione DESC";
+          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.Username=? ORDER BY DataPubblicazione DESC";
           $query=$db->prepare($sql);
           $dati=array($_GET["canale"]);
           $query->execute($dati);
@@ -77,10 +77,10 @@
               $tempoVis=$vis["TempoVisualizzazione"];
               $creator=$vis["Username"];
             }
-            echo '<div class="card m-3" style="width: 16rem;">
-                    <div class="card-body" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
-                      <h5 class="card-title">'. $row["Titolo"] .'</h5>
-                      <p class="card-text">
+            echo '<div class="card card-video m-3" style="width: 16rem;">
+                    <div class="card-body card-video" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
+                      <h5 class="card-title card-video">'. $row["Titolo"] .'</h5>
+                      <p class="card-text card-video">
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'</small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>

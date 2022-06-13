@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Giu 13, 2022 alle 08:20
+-- Creato il: Giu 13, 2022 alle 10:13
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -42,7 +42,7 @@ CREATE TABLE `Accounts` (
 
 INSERT INTO `Accounts` (`IdAccount`, `Username`, `Mail`, `Password`, `Canale`, `NumeroIscritti`) VALUES
 (6, 'Molly', 'micia@sium.it', '$2y$10$WCuwQF.JFT8q5nDG4rLIE.l/AtFYINoTa7gQ5Qq0ThniLMpiCnrbC', 1, 0),
-(7, 'Lollo', 'boh@alaal.com', '$2y$10$d/E5CvjfXB20YzZhFm0zIeqsB8gHZgwJ/r7X17fyiqVo79Hq51up.', 0, NULL),
+(7, 'Lollo', 'boh@alaal.com', '$2y$10$d/E5CvjfXB20YzZhFm0zIeqsB8gHZgwJ/r7X17fyiqVo79Hq51up.', 1, 0),
 (8, 'provini', 'prova@provini.it', '$2y$10$tOjZhA8hACnFkz2MX2w0OOx0CDMRkLLqh7Bek387b97tUTk7NBo06', 0, NULL);
 
 -- --------------------------------------------------------
@@ -112,6 +112,7 @@ CREATE TABLE `Composizioni_Playlists` (
 INSERT INTO `Composizioni_Playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (3, 1),
 (4, 1),
+(5, 1),
 (4, 2),
 (3, 3),
 (4, 3),
@@ -196,28 +197,28 @@ INSERT INTO `Playlists` (`IdPlaylist`, `Pubblica`, `NomePlaylist`, `TipoPlaylist
 -- --------------------------------------------------------
 
 --
--- Struttura della tabella `Scritti`
+-- Struttura della tabella `Post_Scritti`
 --
 
-CREATE TABLE `Scritti` (
+CREATE TABLE `Post_Scritti` (
   `IdPost` int(11) NOT NULL,
   `Titolo` varchar(40) NOT NULL,
   `DataPubblicazione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `NumeroLike` int(11) NOT NULL DEFAULT '0',
   `TestoPost` varchar(400) NOT NULL,
   `IdAccount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dump dei dati per la tabella `Scritti`
+-- Dump dei dati per la tabella `Post_Scritti`
 --
 
-INSERT INTO `Scritti` (`IdPost`, `Titolo`, `DataPubblicazione`, `NumeroLike`, `TestoPost`, `IdAccount`) VALUES
-(2, 'Prova1', '2022-06-09 12:08:31', 0, 'Dovrebbe andare tutto direi.', 6),
-(3, 'Questo va!', '2022-06-09 12:09:44', 0, 'Ne sono sicuro', 6),
-(4, 'Prova1', '2022-06-09 12:32:10', 0, 'ciao', 6),
-(5, 'Tutto bello', '2022-06-11 11:43:56', 0, 'Il sito vaaaaaa', 6),
-(6, 'ewfa', '2022-06-11 11:54:31', 0, 'dfkjndskjdsnkdsk kasc.', 6);
+INSERT INTO `Post_Scritti` (`IdPost`, `Titolo`, `DataPubblicazione`, `TestoPost`, `IdAccount`) VALUES
+(2, 'Prova1', '2022-06-09 12:08:31', 'Dovrebbe andare tutto direi.', 6),
+(3, 'Questo va!', '2022-06-09 12:09:44', 'Ne sono sicuro', 6),
+(4, 'Prova1', '2022-06-09 12:32:10', 'ciao', 6),
+(5, 'Tutto bello', '2022-06-11 11:43:56', 'Il sito vaaaaaa', 6),
+(6, 'ewfa', '2022-06-11 11:54:31', 'dfkjndskjdsnkdsk kasc.', 6),
+(7, 'Non sono Molly', '2022-06-13 10:38:41', 'siam', 7);
 
 -- --------------------------------------------------------
 
@@ -241,7 +242,8 @@ CREATE TABLE `Video` (
 
 INSERT INTO `Video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, `NumeroLike`, `NumeroVisualizzazioni`, `IdAccount`) VALUES
 (3, 'Believer - Imagine Dragons', '7wtfhZwyrcc', '2022-06-09 18:50:43', 1, 2, 6),
-(4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 2, 2, 6);
+(4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 2, 2, 6),
+(5, ' Forget me too - Machine Gun Kelly ft. Halsey', '0tn6nWYNK3Q', '2022-06-13 10:35:37', 0, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -261,8 +263,9 @@ CREATE TABLE `Visualizzazioni` (
 
 INSERT INTO `Visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) VALUES
 (6, 3, 71),
-(6, 4, 0),
-(7, 3, 73),
+(6, 4, 130),
+(6, 5, 0),
+(7, 3, 80),
 (7, 4, 0);
 
 --
@@ -349,9 +352,9 @@ ALTER TABLE `Playlists`
   ADD KEY `IdAccount` (`IdAccount`);
 
 --
--- Indici per le tabelle `Scritti`
+-- Indici per le tabelle `Post_Scritti`
 --
-ALTER TABLE `Scritti`
+ALTER TABLE `Post_Scritti`
   ADD PRIMARY KEY (`IdPost`),
   ADD KEY `IdAccount` (`IdAccount`);
 
@@ -416,16 +419,16 @@ ALTER TABLE `Playlists`
   MODIFY `IdPlaylist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT per la tabella `Scritti`
+-- AUTO_INCREMENT per la tabella `Post_Scritti`
 --
-ALTER TABLE `Scritti`
-  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+ALTER TABLE `Post_Scritti`
+  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `Video`
 --
 ALTER TABLE `Video`
-  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Limiti per le tabelle scaricate
@@ -457,7 +460,7 @@ ALTER TABLE `Chats`
 --
 ALTER TABLE `Commenti`
   ADD CONSTRAINT `IdAccountC` FOREIGN KEY (`IdAccount`) REFERENCES `Accounts` (`IdAccount`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `IdPost` FOREIGN KEY (`IdPost`) REFERENCES `Scritti` (`IdPost`) ON UPDATE CASCADE,
+  ADD CONSTRAINT `IdPost` FOREIGN KEY (`IdPost`) REFERENCES `post_scritti` (`IdPost`) ON UPDATE CASCADE,
   ADD CONSTRAINT `IdVideoC` FOREIGN KEY (`IdVideo`) REFERENCES `Video` (`IdVideo`) ON UPDATE CASCADE;
 
 --
@@ -489,9 +492,9 @@ ALTER TABLE `Playlists`
   ADD CONSTRAINT `IdAccountP` FOREIGN KEY (`IdAccount`) REFERENCES `Accounts` (`IdAccount`) ON UPDATE CASCADE;
 
 --
--- Limiti per la tabella `Scritti`
+-- Limiti per la tabella `Post_Scritti`
 --
-ALTER TABLE `Scritti`
+ALTER TABLE `Post_Scritti`
   ADD CONSTRAINT `IdAccountS` FOREIGN KEY (`IdAccount`) REFERENCES `Accounts` (`IdAccount`) ON UPDATE CASCADE;
 
 --

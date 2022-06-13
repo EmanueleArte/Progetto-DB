@@ -39,7 +39,7 @@
         <div id="postScritti" class="row">
         <?php
           // Dati dei post
-          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount ORDER BY DataPubblicazione DESC LIMIT 4";
+          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount ORDER BY DataPubblicazione DESC LIMIT 4";
           $query=$db->prepare($sql);
           $query->execute();
           $ris=$query->fetchAll();
@@ -78,11 +78,11 @@
               $tempoVis=$vis["TempoVisualizzazione"];
               //$creator=$vis["Username"];
             }
-            echo '<div class="card m-3" style="width: 16rem;">
-                    <div class="card-body" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
-                      <h5 class="card-title">'. $row["Titolo"] .'</h5>
-                      <p class="card-text">
-                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: <button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $creator .'\'">'. $creator .'</button></small><br>
+            echo '<div class="card card-video m-3" style="width: 16rem;">
+                    <div class="card-body card-video" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
+                      <h5 class="card-title card-video">'. $row["Titolo"] .'</h5>
+                      <p class="card-text card-video">
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $creator .'\'">'. $creator .'</button></small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
                       </p>

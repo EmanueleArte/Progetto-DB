@@ -39,7 +39,7 @@
               $primaVis=0;
             }
             // Numero visualizzazioni e like
-            $sql="SELECT * FROM Video WHERE IdVideo=?";
+            $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE IdVideo=?";
             $query=$db->prepare($sql);
             $dati=array($_GET["id"]);
             $query->execute($dati);
@@ -69,7 +69,8 @@
               if (count($risV)>0) {
                 $classLike="liked";
               }
-              echo '<p class="">
+              echo '<p>
+                      <p class="text-muted mr-3">Pubblicato il: '. $row["DataPubblicazione"] .' da: <button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button><br></p>
                       <p id="nLike" class="'. $classLike .'">'. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3" onclick="addLikeVideo(\'nLike\')"></i></p>
                       <p id="nVis">'. $vis .' <i class="fa fa-eye"></i></p>
                     </p>';

@@ -28,7 +28,7 @@ div, h2, p {
   cursor: default;
 }
 
-.card,.card-body,.card-title,.card-text {
+.card-video {
   cursor: pointer;
 }
 
@@ -75,7 +75,7 @@ body {
 	/*transition: all .2s ease-in-out;*/
 }
 
-.btn-outline-dark, .btn-outline-primary {
+.btn,.form-control {
   border-radius: 2rem;
 }
 
