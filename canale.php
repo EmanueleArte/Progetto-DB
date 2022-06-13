@@ -28,19 +28,18 @@
     <!-- intestazione (BOTTONI) -->
     <div class="row justify-content-center">
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
+      <?php
+        echo '<button type="button" class="btn btn-outline-dark" onclick="location.href=\'chat.php?username='. $_GET["canale"] .'\'">Chat</button>';
+      ?>
     </div>
     <div class="row justify-content-center">
       <div class="col-10">
         <h1>Canale: <?php echo $_GET["canale"]; ?></h1>
-<<<<<<< HEAD
         <h4>Iscritti: <?php 
           foreach($ris as $row) {
             echo $row["NumeroIscritti"];
           }
           ?></h4>
-=======
-        <button type="button" class="btn btn-outline-dark" onclick="location.href='chat.php?username=<?php echo $_GET["canale"]; ?>'">Chat</button>
->>>>>>> 3cd93ddc5d9a567a66ae3f93fdf64344678c7ca1
         <h2 class="titleText mt-3">Post scritti</h2>
         <div class="row">
           <?php
