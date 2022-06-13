@@ -36,7 +36,7 @@
         <div class="row">
         <?php
           // Dati dei post
-          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.IdAccount=? ORDER BY DataPubblicazione DESC";
+          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.IdAccount=? ORDER BY DataPubblicazione DESC";
           $query=$db->prepare($sql);
           $dati=array($_SESSION["loginID"]);
           $query->execute($dati);
