@@ -35,11 +35,19 @@
     <div class="row justify-content-center">
       <div class="col-10">
         <h1>Canale: <?php echo $_GET["canale"]; ?></h1>
-        <h4>Iscritti: <?php 
+        <h4>Iscritti: 
+        <?php 
           foreach($ris as $row) {
             echo $row["NumeroIscritti"];
           }
-          ?></h4>
+          // Tasto iscrizione
+          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.Username=? ORDER BY DataPubblicazione DESC";
+          $query=$db->prepare($sql);
+          $dati=array($_GET["canale"]);
+          $query->execute($dati);
+          $ris=$query->fetchAll();
+        ?>
+        </h4>
         <h2 class="titleText mt-3">Post scritti</h2>
         <div class="row">
           <?php
