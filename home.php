@@ -86,7 +86,6 @@
             $creator=$row["Username"];
             foreach($risVis as $vis) {
               $tempoVis=$vis["TempoVisualizzazione"];
-              //$creator=$vis["Username"];
             }
             echo '<div class="card card-video m-3" style="width: 16rem;">
                     <div class="card-body card-video" onclick="cardOnClick(\''. $row["IdVideo"] .'\',\''. $row["Titolo"] .'\',\''. $row["SorgenteVideo"] .'\',\''. $tempoVis .'\',\''. $creator .'\')">
@@ -106,15 +105,6 @@
   </div>
 
   <script src="js/functions.js"></script>
-  <script>
-    function cardOnClick(id, titolo, video, time, creator) {
-      if(event.target.tagName.toLowerCase() == "button"){
-        location.href="canale.php?canale=" + creator;
-      } else {
-        location.href="video.php?id=" + id + "&titolo=" + titolo + "&video=" + video + "&time=" + time;
-      }
-    }
-  </script>
   
   <!-- js per bootstrap -->
   <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>

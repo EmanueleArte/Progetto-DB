@@ -39,7 +39,7 @@
             $idLikes=$row["IdPlaylist"];
           }
           // Ottenimento cronologia
-          $sql="SELECT * FROM Video WHERE IdVideo IN (SELECT IdVideo FROM Composizioni_playlists WHERE IdPlaylist=?)";
+          $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE IdVideo IN (SELECT IdVideo FROM Composizioni_playlists WHERE IdPlaylist=?)";
           $query=$db->prepare($sql);
           $dati=array($idLikes);
           $query->execute($dati);
@@ -52,15 +52,15 @@
             $query->execute($dati);
             $risVis=$query->fetchAll();
             $tempoVis=-1;
+            $creator=$row["Username"];
             foreach($risVis as $vis) {
               $tempoVis=$vis["TempoVisualizzazione"];
-              $creator=$vis["Username"];
             }
-            echo '<div class="card m-3" style="width: 16rem;">
-                    <div class="card-body" onclick="location.href=\'video.php?id='. $row["IdVideo"] .'&titolo='. $row["Titolo"] .'&video='. $row["SorgenteVideo"] .'&time='. $tempoVis .'\'">
-                      <h5 class="card-title">'. $row["Titolo"] .'</h5>
-                      <p class="card-text">
-                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $creator .'</small><br>
+            echo '<div class="card card-video m-3" style="width: 16rem;">
+                    <div class="card-body card-video" onclick="cardOnClick(\''. $row["IdVideo"] .'\',\''. $row["Titolo"] .'\',\''. $row["SorgenteVideo"] .'\',\''. $tempoVis .'\',\''. $creator .'\')">
+                      <h5 class="card-title card-video">'. $row["Titolo"] .'</h5>
+                      <p class="card-text card-video">
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini">'. $creator .'</button></small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
                       </p>

@@ -32,6 +32,11 @@
     <div class="row justify-content-center">
       <div class="col-10">
         <h1>Canale: <?php echo $_GET["canale"]; ?></h1>
+        <h4>Iscritti: <?php 
+          foreach($ris as $row) {
+            echo $row["NumeroIscritti"];
+          }
+          ?></h4>
         <h2 class="titleText mt-3">Post scritti</h2>
         <div class="row">
           <?php

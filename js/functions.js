@@ -25,21 +25,6 @@ async function postData(url, data){
   return res;
 }
 
-
-
-// Chiamata query di lettura chat esistenti
-function readChat() {
-  var formData = new FormData();
-  postData('readChat.php', formData)
-  .then((data)=>{
-    return data.text();
-  })
-  .then((res)=>{
-    mostraChat(res);
-  })
-}
-
-
 var player;
 var tempoVis;
 const queryString = window.location.search;
@@ -106,4 +91,14 @@ function addLikeVideo(idLike) {
   var formData = new FormData();
   formData.append("idVideo", videoID);
   postData('likeVideo.php', formData);
+}
+
+
+// Click della card del video o del bottone del canale
+function cardOnClick(id, titolo, video, time, creator) {
+  if(event.target.tagName.toLowerCase() == "button"){
+    location.href="canale.php?canale=" + creator;
+  } else {
+    location.href="video.php?id=" + id + "&titolo=" + titolo + "&video=" + video + "&time=" + time;
+  }
 }
