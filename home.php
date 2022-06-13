@@ -50,7 +50,6 @@
                       <p class="card-text">
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button></small><br>
                         '. $row["TestoPost"] .'<br>
-                        <!-- '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up"></i> -->
                       </p>
                     </div>
                   </div>';

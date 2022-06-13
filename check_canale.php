@@ -1,5 +1,4 @@
 <?php
-  include("check_session.php");
   include("db.php");
 
   

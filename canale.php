@@ -48,7 +48,6 @@
                       <p class="card-text">
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'</small><br>
                         '. $row["TestoPost"] .'<br>
-                        <!-- '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up"></i> -->
                       </p>
                     </div>
                   </div>';
