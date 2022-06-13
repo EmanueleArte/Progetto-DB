@@ -90,8 +90,22 @@ function addLikeVideo(idLike) {
   refreshLike(idLike);
   var formData = new FormData();
   formData.append("idVideo", videoID);
+<<<<<<< HEAD
+  postData('likeVideo.php', formData)
+  .then((res)=>{
+  });
+}
+
+// CHAT
+// Invia un messaggio chat salvandolo nel db
+function sendMessageChat(idAccount) {
+    const chatID = urlParams.get('chatID');
+
+}
+=======
   postData('likeVideo.php', formData);
 }
+<<<<<<< HEAD
 
 
 // Click della card del video o del bottone del canale
@@ -102,3 +116,6 @@ function cardOnClick(id, titolo, video, time, creator) {
     location.href="video.php?id=" + id + "&titolo=" + titolo + "&video=" + video + "&time=" + time;
   }
 }
+=======
+>>>>>>> 02d5b144e5a3d910800bd72b0e05a9950714820e
+>>>>>>> 3cd93ddc5d9a567a66ae3f93fdf64344678c7ca1

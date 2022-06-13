@@ -31,7 +31,8 @@
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='info.php'">Info</button>
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='cronologia.php'">Cronologia</button>
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='video_piaciuti.php'">Video piaciuti</button>
-      <button type="button" class="btn btn-outline-dark" onclick="location.href='logout.php'">Logout</button>
+      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='logout.php'">Logout</button>
+      <button type="button" class="btn btn-outline-dark" onclick="location.href='chat.php'">Chat</button>
     </div>
     <div class="row justify-content-center">
       <div id="homePosts" class="col-10">
