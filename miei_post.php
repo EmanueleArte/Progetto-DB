@@ -36,7 +36,7 @@
         <div class="row">
         <?php
           // Dati dei post
-          $sql="SELECT * FROM Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.IdAccount=? ORDER BY DataPubblicazione DESC";
+          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.IdAccount=? ORDER BY DataPubblicazione DESC";
           $query=$db->prepare($sql);
           $dati=array($_SESSION["loginID"]);
           $query->execute($dati);
@@ -48,7 +48,6 @@
                       <p class="card-text">
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $row["Username"] .'</small><br>
                         '. $row["TestoPost"] .'<br>
-                        <!-- '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up"></i> -->
                       </p>
                     </div>
                   </div>';
