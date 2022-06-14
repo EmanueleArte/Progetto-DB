@@ -26,7 +26,7 @@
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center h-100">
-      <div id="chatLeft" class="col-3 float-left h-100">
+      <div id="chatLeft" class="col-3 float-left" style="overflow: auto; height:90%">
         <h2 class="titleText mt-3">Chat</h2>
         <div id="chats" class="column" style="overflow: auto">
         <?php
@@ -52,8 +52,8 @@
                   </div>';
           }
         ?>
-          <div class="form-group w-100 mb-3">
-            <p>Inizia una nuova chat</p>
+          <div class="form-group mb-3 ml-3" style="width: 16rem;">
+            <p class="ml-2">Inizia una nuova chat:</p>
             <input type="text" id="createChatText" class="form-control" onkeydown="new function(){
               if(event.key === 'Enter') window.location.href='chat.php?username='+document.getElementById('createChatText').value;
             }" placeholder="Username" required>

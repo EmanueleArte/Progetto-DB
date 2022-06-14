@@ -106,7 +106,7 @@
                             <h6 class="card-title">'.$commento["Username"].'</h6>
                             <p class="card-text">
                               '.$commento["TestoCommento"].'
-                            </p><br>
+                            </p>
                             <small class="text-muted">'. $commento["DataCommento"] .'</small>
                           </div>
                         </div>
