@@ -52,10 +52,10 @@
                   </div>';
           }
         ?>
-          <div class="form-group w-100 mb-3">
-            <p>Inizia un nuova chat</p>
+          <div class="form-group mb-3 ml-3" style="width: 16rem;">
+            <p class="ml-2">Inizia un nuova chat:</p>
             <input type="text" id="createChatText" class="form-control" onkeydown="createChat(this)" placeholder="Username" required>
-          </div>';
+          </div>
         </div>
         <h2 class="titleText mt-3">Gruppi</h2>
         <div id="groups" class="column" style="overflow: auto">
