@@ -26,9 +26,9 @@
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center">
-      <div id="homePosts" class="col-10">
+      <div id="chatLeft" class="col-4 float-left">
         <h2 class="titleText mt-3">Chat</h2>
-        <div id="chat" class="row">
+        <div id="chats" class="column">
         <?php
           // Chat aperte
           $sql="SELECT * FROM Chats c WHERE c.IdAccount1=".$_SESSION["loginID"]." OR c.IdAccount2=".$_SESSION["loginID"];
@@ -56,6 +56,8 @@
           }
         ?>
         </div>
+        </div>
+        <div id="chatRight" class="col-8 float-right">
         <?php
           // Messaggi chat
           if(isset($_GET["chatID"])){
@@ -65,20 +67,24 @@
                   $query->execute();
                   $ris=$query->fetch();*/
                 echo '<h2 class="titleText mt-3"> Una Chat :)</h2>
-                <div id="" class="row">';
+                <div id="messagesField" class="row w-100">';
                 $sql="SELECT * FROM Messaggi WHERE IdChat=".$id." ORDER BY DataInvio";
                   $query=$db->prepare($sql);
                   $query->execute();
                   $ris=$query->fetchAll();
                   foreach($ris as $msg) {
-                      echo '<div class="card m-3" style="width: 16rem;">
+                      echo '<div class="w-100"><div class="card m-3" style="width: 16rem;">
                         <div class="card-body">
                           <p class="card-text">
                             '.$msg["TestoMessaggio"].'
-                          </p><br><small class="text-muted">'. $msg["DataInvio"] .'
+                          </p><small class="text-muted">'. $msg["DataInvio"] .'
                         </div>
+                      </div>
                       </div>';
                   }
+                  echo '</div><div class="form-group w-100">
+                  <input type="text" id="messageText" class="form-control" onkeydown="sendMessageChat()" placeholder="Scrivi un messaggio" required>
+                  </div>';
           }
           // Messaggi gruppo
           if(isset($_GET["groupID"])){
@@ -98,8 +104,6 @@
                   </div>';
           }*/
         ?>
-          <div class="form-group">
-            <input type="text" id="messageText" class="form-control" placeholder="Scrivi un messaggio" required>
           </div>
         </div>
       </div>
