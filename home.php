@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- icona + titolo -->
   <link rel="icon" href="">
-  <title>Sito streaming</title>
+  <title>Sito streaming - Home</title>
   <!-- fogli di stile esterni + bootstrap -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom_style.css">
@@ -73,7 +73,7 @@
           }
         ?>
         </div>
-        
+
         <div id="postScrittiSeguiti" class="row">
         <?php
           // Dati dei post dei canali seguiti

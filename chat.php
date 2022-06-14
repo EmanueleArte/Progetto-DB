@@ -6,12 +6,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- icona + titolo -->
   <link rel="icon" href="">
-  <title>Chat</title>
+  <title>Sito streaming - Chat</title>
   <!-- fogli di stile esterni + bootstrap -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom_style.css">
 </head>
-<body>
+<body style="overflow: hidden">
 
   <?php
     include("check_session.php");
@@ -19,7 +19,7 @@
     #include("check_canale.php");
   ?>
 
-  <!-- spazio home -->
+  <!-- spazio chat -->
   <div class="container-fluid pt-3 h-100">
     <!-- intestazione (BOTTONI) -->
     <div class="row justify-content-center">
@@ -70,7 +70,7 @@
         ?>
         </div>
         </div>
-        <div id="chatRight" class="container-fluid row col-8 float-right h-100">
+        <div id="chatRight" class="container-fluid row col-8 float-right h-100 mb-3">
         <?php
           // Messaggi chat
           if(isset($_GET["chatID"])){
@@ -84,7 +84,7 @@
               // Se l'id chat non esiste o l'account non ne fa parte
               echo '<h2 class="titleText mt-3">ID chat non valido</h2>';
             } else {
-              // Se l'id chat è valido
+              // Se l'id chat ï¿½ valido
               if($ris["IdAccount1"] == $_SESSION["loginID"]) {
                 $altroId = $ris["IdAccount2"];
               } else {
@@ -96,7 +96,7 @@
               $query->execute();
               $ris=$query->fetch();
               echo '<h2 class="titleText mt-3">'.$ris["Username"].'</h2>
-              <div id="messagesField" class="row w-100 overflow-auto">';
+                    <div id="messagesField" class="row w-100" style="height: 70%; overflow: auto">';
               // Trovo i messaggi appartenenti alla chat
               $sql="SELECT * FROM Messaggi WHERE IdChat=".$id." ORDER BY DataInvio";
               $query=$db->prepare($sql);
@@ -105,31 +105,34 @@
               foreach($ris as $msg) {
                 if($msg["IdAccount"] != $_SESSION["loginID"]){
                   // Messaggio inviato dall'altro
-                  echo '<div class="w-100"><div class="card m-3 w-auto" style="display:inline-block">
-                    <div class="card-body w-auto">
-                      <p class="card-text" style="display:inline-block">
-                        '.$msg["TestoMessaggio"].'
-                      </p><br>
-                      <small class="text-muted">'. $msg["DataInvio"] .'</small>
-                    </div>
-                  </div>
-                  </div>';
+                  echo '<div class="w-100">
+                          <div class="card m-2 w-auto" style="display:inline-block">
+                            <div class="card-body w-auto">
+                              <p class="card-text" style="display:inline-block">
+                                '.$msg["TestoMessaggio"].'
+                              </p><br>
+                              <small class="text-muted">'. $msg["DataInvio"] .'</small>
+                            </div>
+                          </div>
+                        </div>';
                 } else {
-                  // Messaggio inviato da sé stessi
-                  echo '<div class="w-100"><div class="card m-3 w-auto float-right bg-light" style="display:inline-block">
-                    <div class="card-body w-auto">
-                      <p class="card-text float-right" style="display:inline-block; text-align:right">
-                        '.$msg["TestoMessaggio"].'
-                      </p><br>
-                      <small class="text-muted float-right">'. $msg["DataInvio"] .'</small>
-                    </div>
-                  </div>
-                  </div>';
+                  // Messaggio inviato da sï¿½ stessi
+                  echo '<div class="w-100">
+                          <div class="card m-2 w-auto float-right bg-light" style="display:inline-block">
+                            <div class="card-body w-auto">
+                              <p class="card-text float-right" style="display:inline-block; text-align:right">
+                                '.$msg["TestoMessaggio"].'
+                              </p><br>
+                              <small class="text-muted float-right mb-3">'. $msg["DataInvio"] .'</small>
+                            </div>
+                          </div>
+                        </div>';
                 }
               }
-              echo '</div><div class="form-group w-100">
-              <input type="text" id="messageText" class="form-control" onkeydown="sendMessageChat()" placeholder="Scrivi un messaggio" required>
-              </div>';
+              echo '</div>
+                    <div class="form-group w-100 mb-3">
+                      <input type="text" id="messageText" class="form-control" onkeydown="sendMessageChat()" placeholder="Scrivi un messaggio" required>
+                    </div>';
             }
           }
           // Messaggi gruppo
@@ -150,7 +153,7 @@
               $query->execute();
               $ris=$query->fetch();
               if($ris != null) {
-                // Se l'id gruppo è valido
+                // Se l'id gruppo ï¿½ valido
                 echo '<h2 class="titleText mt-3">'.$gruppo["NomeGruppo"].'</h2>';
                 // Trovo chi fa parte del gruppo
                 $sql="SELECT * FROM Appartenenze_Gruppi ag, Accounts a WHERE a.IdAccount = ag.IdAccount AND ag.IdGruppo=".$idGruppo;
@@ -163,7 +166,8 @@
                   if($key > 0) echo ',&nbsp';
                   echo '</p>';
                 }
-                echo '</div><div id="messagesField" class="row w-100 overflow-auto">';
+                echo '</div>
+                      <div id="messagesField" class="row w-100" style="height: 60%; overflow: auto">';
                 // Trovo i messaggi appartenenti al gruppo
                 $sql="SELECT * FROM Messaggi m, Accounts a WHERE a.IdAccount = m.IdAccount AND m.IdGruppo=".$idGruppo." ORDER BY m.DataInvio";
                 $query=$db->prepare($sql);
@@ -172,32 +176,35 @@
                 foreach($ris as $msg) {
                   if($msg["IdAccount"] != $_SESSION["loginID"]){
                     // Messaggio inviato da altri
-                    echo '<div class="w-100"><div class="card m-3 w-auto" style="display:inline-block">
-                      <div class="card-body w-auto">
-                        <small class="text-muted">'. $msg["Username"] .'</small><br>
-                        <p class="card-text" style="display:inline-block">
-                          '.$msg["TestoMessaggio"].'
-                        </p><br>
-                        <small class="text-muted">'. $msg["DataInvio"] .'</small>
-                      </div>
-                    </div>
-                    </div>';
+                    echo '<div class="w-100">
+                            <div class="card m-3 w-auto" style="display:inline-block">
+                              <div class="card-body w-auto">
+                                <small class="text-muted">'. $msg["Username"] .'</small><br>
+                                <p class="card-text" style="display:inline-block">
+                                  '.$msg["TestoMessaggio"].'
+                                </p><br>
+                                <small class="text-muted">'. $msg["DataInvio"] .'</small>
+                              </div>
+                            </div>
+                          </div>';
                   } else {
-                    // Messaggio inviato da sé stessi
-                    echo '<div class="w-100"><div class="card m-3 w-auto float-right bg-light" style="display:inline-block; text-align:right">
-                      <div class="card-body w-auto">
-                        <p class="card-text float-right" style="display:inline-block text-align:center">
-                          '.$msg["TestoMessaggio"].'
-                        </p><br>
-                        <small class="text-muted float-right">'. $msg["DataInvio"] .'</small>
-                      </div>
-                    </div>
-                    </div>';
+                    // Messaggio inviato da sï¿½ stessi
+                    echo '<div class="w-100">
+                            <div class="card m-3 w-auto float-right bg-light" style="display:inline-block; text-align:right">
+                              <div class="card-body w-auto">
+                                <p class="card-text float-right" style="display:inline-block text-align:center">
+                                  '.$msg["TestoMessaggio"].'
+                                </p><br>
+                                <small class="text-muted float-right mb-3">'. $msg["DataInvio"] .'</small>
+                              </div>
+                            </div>
+                          </div>';
                   }
                 }
-                echo '</div><div class="form-group w-100">
-                <input type="text" id="messageText" class="form-control" onkeydown="sendMessageGroup()" placeholder="Scrivi un messaggio" required>
-                </div>';
+                echo '</div>
+                      <div class="form-group w-100 mb-3">
+                        <input type="text" id="messageText" class="form-control" onkeydown="sendMessageGroup()" placeholder="Scrivi un messaggio" required>
+                      </div>';
               }
             }
           }

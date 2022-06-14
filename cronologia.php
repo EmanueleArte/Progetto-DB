@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- icona + titolo -->
   <link rel="icon" href="">
-  <title>Sito streaming</title>
+  <title>Sito streaming - Cronologia</title>
   <!-- fogli di stile esterni + bootstrap -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom_style.css">
