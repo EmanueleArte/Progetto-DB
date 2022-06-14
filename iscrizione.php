@@ -21,6 +21,11 @@
         $query=$db->prepare($sql);
         $dati=array($idCanale, $_SESSION["loginID"]);
         $query->execute($dati);
+        // Decrementa iscritti account
+        $sql="UPDATE Accounts SET NumeroIscritti=NumeroIscritti-1 WHERE IdAccount=?";
+        $query=$db->prepare($sql);
+        $dati=array($idCanale);
+        $query->execute($dati);
       } else {
         // Ottiene idCanale
         $sql="SELECT * FROM Accounts WHERE Username=?";
@@ -36,6 +41,11 @@
         $sql="INSERT INTO Iscrizioni(IdCanale, IdIscritto) VALUES (?,?)";
         $query=$db->prepare($sql);
         $dati=array($idCanale, $_SESSION["loginID"]);
+        $query->execute($dati);
+        // Incrementa iscritti account
+        $sql="UPDATE Accounts SET NumeroIscritti=NumeroIscritti+1 WHERE IdAccount=?";
+        $query=$db->prepare($sql);
+        $dati=array($idCanale);
         $query->execute($dati);
       }
     }

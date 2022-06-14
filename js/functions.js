@@ -106,6 +106,26 @@ function cardOnClick(id, titolo, video, time, creator) {
   }
 }
 
+// mostra e nasconde i contenuti della home
+function switchContent() {
+  const contentSwitch=document.getElementById("contentSwitch");
+  var tuttiPost=document.getElementById("postScrittiTutti");
+  var tuttiVideo=document.getElementById("postVideoTutti");
+  var seguitiPost=document.getElementById("postScrittiSeguiti");
+  var seguitiVideo=document.getElementById("postVideoSeguiti");
+  if(contentSwitch.checked) {
+    seguitiPost.hidden=false;
+    seguitiVideo.hidden=false;
+    tuttiPost.hidden=true;
+    tuttiVideo.hidden=true;
+  } else {
+    tuttiPost.hidden=false;
+    tuttiVideo.hidden=false;
+    seguitiPost.hidden=true;
+    seguitiVideo.hidden=true;
+  }
+}
+
 
 
 // CHAT

@@ -27,10 +27,10 @@
   <div class="container-fluid pt-3">
     <!-- intestazione (BOTTONI) -->
     <div class="row justify-content-center">
-      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
       <?php
-        echo '<button type="button" class="btn btn-outline-dark" onclick="location.href=\'chat.php?username='. $_GET["canale"] .'\'">Chat</button>';
+        echo '<button type="button" class="btn btn-outline-dark mr-3" onclick="location.href=\'chat.php?username='. $_GET["canale"] .'\'">Chat</button>';
       ?>
+      <button type="button" class="btn btn-outline-dark" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center">
       <div class="col-10">
@@ -38,9 +38,6 @@
         <h4>Iscritti: 
         <?php
           $idCanale;
-          foreach($ris as $row) {
-            echo $row["NumeroIscritti"];
-          }
           // Ottiene idCanale
           $sql="SELECT * FROM Accounts WHERE Username=?";
           $query=$db->prepare($sql);
@@ -48,6 +45,7 @@
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
+            echo $row["NumeroIscritti"];
             $idCanale=$row["IdAccount"];
           }
           // Tasto iscrizione
