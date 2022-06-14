@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Giu 14, 2022 alle 11:14
+-- Creato il: Giu 14, 2022 alle 15:15
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -68,6 +68,19 @@ CREATE TABLE `categorizzazioni_video` (
   `IdVideo` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dump dei dati per la tabella `categorizzazioni_video`
+--
+
+INSERT INTO `categorizzazioni_video` (`IdEtichetta`, `IdVideo`) VALUES
+(1, 3),
+(1, 4),
+(1, 5),
+(2, 6),
+(4, 8),
+(6, 9),
+(14, 9);
+
 -- --------------------------------------------------------
 
 --
@@ -122,6 +135,9 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (4, 1),
 (5, 1),
 (6, 1),
+(8, 1),
+(9, 1),
+(4, 2),
 (6, 2),
 (3, 3),
 (4, 3),
@@ -131,8 +147,7 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (5, 7),
 (6, 7),
 (4, 8),
-(5, 8),
-(6, 8);
+(5, 8);
 
 -- --------------------------------------------------------
 
@@ -144,6 +159,26 @@ CREATE TABLE `etichette` (
   `IdEtichetta` int(11) NOT NULL,
   `NomeEtichetta` varchar(20) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `etichette`
+--
+
+INSERT INTO `etichette` (`IdEtichetta`, `NomeEtichetta`) VALUES
+(1, 'Musica'),
+(2, 'Animali'),
+(3, 'Sport'),
+(4, 'Motori'),
+(5, 'Viaggi'),
+(6, 'Vlog'),
+(7, 'Azione'),
+(8, 'Curiosità'),
+(9, 'Giochi'),
+(10, 'Trailer'),
+(11, 'Tutorial'),
+(12, 'Avventura'),
+(13, 'Cibo'),
+(14, 'Tecnologia');
 
 -- --------------------------------------------------------
 
@@ -275,9 +310,11 @@ CREATE TABLE `video` (
 
 INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, `NumeroLike`, `NumeroVisualizzazioni`, `IdAccount`) VALUES
 (3, 'Believer - Imagine Dragons', '7wtfhZwyrcc', '2022-06-09 18:50:43', 1, 2, 6),
-(4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 2, 3, 6),
+(4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 3, 3, 6),
 (5, ' Forget me too - Machine Gun Kelly ft. Halsey', '0tn6nWYNK3Q', '2022-06-13 10:35:37', 1, 2, 6),
-(6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 2, 2, 9);
+(6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 2, 2, 9),
+(8, 'Ferrari SF-90', 'lJcNhqdFo9M', '2022-06-14 16:24:30', 0, 1, 6),
+(9, 'Dentro la sede di Apple', 'UoYPP4fjN2c', '2022-06-14 17:07:45', 0, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -297,9 +334,11 @@ CREATE TABLE `visualizzazioni` (
 
 INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) VALUES
 (6, 3, 72),
-(6, 4, 133),
+(6, 4, 134),
 (6, 5, 59),
-(6, 6, 23),
+(6, 6, 22),
+(6, 8, 127),
+(6, 9, 369),
 (7, 3, 80),
 (7, 4, 0),
 (9, 4, 18),
@@ -436,7 +475,7 @@ ALTER TABLE `commenti`
 -- AUTO_INCREMENT per la tabella `etichette`
 --
 ALTER TABLE `etichette`
-  MODIFY `IdEtichetta` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdEtichetta` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT per la tabella `gruppi`
@@ -466,7 +505,7 @@ ALTER TABLE `post_scritti`
 -- AUTO_INCREMENT per la tabella `video`
 --
 ALTER TABLE `video`
-  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- Limiti per le tabelle scaricate
