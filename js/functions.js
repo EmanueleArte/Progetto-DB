@@ -152,7 +152,19 @@ function switchContent() {
   }
 }
 
-
+function sendComment() {
+  if (event.key === 'Enter') {
+    const videoID = urlParams.get('id');
+    var comment = document.getElementById('commentText').value;
+    document.getElementById('commentText').value = '';
+    var formData = new FormData();
+    formData.append("commentText", comment);
+    formData.append("videoID", videoID);
+    postData('sendComment.php', formData)
+      .then((res) => {
+      });
+  }
+}
 
 // CHAT
 // Invia un messaggio chat salvandolo nel db
