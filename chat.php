@@ -51,6 +51,15 @@
                     </div>
                   </div>';
           }
+        ?>
+          <div class="form-group w-100 mb-3">
+            <p>Inizia un nuova chat</p>
+            <input type="text" id="createChatText" class="form-control" onkeydown="createChat(this)" placeholder="Username" required>
+          </div>';
+        </div>
+        <h2 class="titleText mt-3">Gruppi</h2>
+        <div id="groups" class="column" style="overflow: auto">
+        <?php
           // Gruppi
           $sql="SELECT * FROM Appartenenze_Gruppi WHERE IdAccount=".$_SESSION["loginID"];
           $query=$db->prepare($sql);
@@ -136,7 +145,7 @@
             }
           }
           // Messaggi gruppo
-          if(isset($_GET["groupID"])){
+          else if(isset($_GET["groupID"])){
             $idGruppo=$_GET["groupID"];
             // Controllo appartenenza al gruppo
             $sql="SELECT * FROM Gruppi WHERE IdGruppo=".$idGruppo;
@@ -205,6 +214,38 @@
                       <div class="form-group w-100 mb-3">
                         <input type="text" id="messageText" class="form-control" onkeydown="sendMessageGroup()" placeholder="Scrivi un messaggio" required>
                       </div>';
+              }
+            }
+          }
+          // Creazione chat
+          else if(isset($_GET["username"])){
+            $sql="SELECT * FROM Accounts WHERE Username='".$_GET["username"]."'";
+            $query=$db->prepare($sql);
+            $query->execute();
+            $ris=$query->fetch();
+            if($ris!=null){
+              $id=$ris["IdAccount"];
+              $sql="SELECT * FROM Chats WHERE IdAccount1=? AND IdAccount2=?";
+              $query=$db->prepare($sql);
+              $dati=array($id, $_SESSION["loginID"]);
+              $query->execute($dati);
+              $ris1=$query->fetch();
+              $dati=array($_SESSION["loginID"], $id);
+              $query->execute($dati);
+              $ris2=$query->fetch();
+              if($ris1 != null && $ris1!=""){
+                header("location: chat.php?chatID=".$ris1["IdChat"]);
+              } else if($ris2 != null && $ris2!=""){
+                header("location: chat.php?chatID=".$ris2["IdChat"]);
+              } else{
+                $sql="INSERT INTO Chats(IdAccount1, IdAccount2) VALUES (?,?)";
+                $query=$db->prepare($sql);
+                $dati=array($_SESSION["loginID"], $id);
+                $query->execute($dati);
+                /*$sql="SELECT LAST_INSERT_ID()";
+                $query=$db->prepare($sql);
+                $ris=$query->execute();
+                header("location: chat.php?chatID=".$ris);*/
               }
             }
           }

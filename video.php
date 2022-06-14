@@ -92,7 +92,29 @@
         </div>
           <div class="form-group w-100">
             <input type="text" id="commentText" class="form-control" onkeydown="sendComment()" placeholder="Lascia un commento" required>
-          </div>';
+          </div>
+          <div id='commentsField'>
+            <?php
+              $sql="SELECT * FROM Commenti c, Accounts a WHERE a.IdAccount=c.IdAccount AND c.IdVideo=".$_GET["id"];
+              $query=$db->prepare($sql);
+              $query->execute();
+              $ris=$query->fetchAll();
+              foreach($ris as $commento) {
+                echo '<div class="w-100">
+                        <div class="card m-2 w-auto">
+                          <div class="card-body w-auto">
+                            <h6 class="card-title">'.$commento["Username"].'</h6>
+                            <p class="card-text">
+                              '.$commento["TestoCommento"].'
+                            </p><br>
+                            <small class="text-muted">'. $commento["DataCommento"] .'</small>
+                          </div>
+                        </div>
+                      </div>'
+                ;
+              }
+            ?>
+          </div>
         </div>
       </div>
     </div>

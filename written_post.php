@@ -6,7 +6,7 @@
   if(isset($_POST["titolo"]) && isset($_POST["testo"])) {
     if($_POST["titolo"]!="" && $_POST["testo"]!="") {
         // inserimento post scritto nel DB
-        $sql="INSERT INTO Scritti(Titolo, TestoPost, IdAccount) VALUES (?,?,?)";
+        $sql="INSERT INTO Post_Scritti(Titolo, TestoPost, IdAccount) VALUES (?,?,?)";
         $query=$db->prepare($sql);
         $dati=array($_POST["titolo"], $_POST["testo"], $_SESSION["loginID"]);
         $ris=$query->execute($dati);
