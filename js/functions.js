@@ -7,18 +7,18 @@ function getCookie(name) {
 
 function setCookie(cname, cvalue, exdays) {
   var d = new Date();
-  d.setTime(d.getTime() + (exdays*24*60*60*1000));
-  var expires = "expires="+ d.toUTCString();
+  d.setTime(d.getTime() + (exdays * 24 * 60 * 60 * 1000));
+  var expires = "expires=" + d.toUTCString();
   document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
-function deleteCookie(name){
-  document.cookie = name+"= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+function deleteCookie(name) {
+  document.cookie = name + "= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
 }
 
 // ASYNC request
-async function postData(url, data){
-  const res = await fetch(url,{
+async function postData(url, data) {
+  const res = await fetch(url, {
     method: "POST",
     body: data
   });
@@ -31,7 +31,7 @@ const queryString = window.location.search;
 const urlParams = new URLSearchParams(queryString);
 // Ottiene secondo di riproduzione del video
 function getCurrTime() {
-  var currTime=player.getCurrentTime();
+  var currTime = player.getCurrentTime();
   return Math.trunc(currTime);
 }
 
@@ -44,12 +44,12 @@ function saveVisual() {
   urlParams.set("time", getCurrTime());
   //window.location.search=urlParams.toString();
   postData('save_visualiz.php', formData)
-  .then((res)=>{
-  });
+    .then((res) => {
+    });
 }
 
 function videoReady() {
-  if(tempoVis!=-1) player.seekTo(tempoVis, true);
+  if (tempoVis != -1) player.seekTo(tempoVis, true);
   setInterval(saveVisual, 1000);
 }
 
@@ -71,15 +71,15 @@ function onYouTubeIframeAPI() {
 
 // Salva il video tra i piaciuti
 function refreshLike(idLike) {
-  var likes=document.getElementById(idLike);
-  var array=likes.innerHTML.split(" ");
-  if(!likes.classList.contains("liked")) {
-    array[0]=parseInt(array[0])+1;
-    likes.innerHTML=array.join(" ");
+  var likes = document.getElementById(idLike);
+  var array = likes.innerHTML.split(" ");
+  if (!likes.classList.contains("liked")) {
+    array[0] = parseInt(array[0]) + 1;
+    likes.innerHTML = array.join(" ");
     likes.classList.add("liked");
   } else {
-    array[0]=parseInt(array[0])-1;
-    likes.innerHTML=array.join(" ");
+    array[0] = parseInt(array[0]) - 1;
+    likes.innerHTML = array.join(" ");
     likes.classList.remove("liked");
   }
 }
@@ -91,18 +91,18 @@ function addLikeVideo(idLike) {
   var formData = new FormData();
   formData.append("idVideo", videoID);
   postData('likeVideo.php', formData)
-  .then((res)=>{
-  });
+    .then((res) => {
+    });
 }
 
 
 
 // Click della card del video o del bottone del canale
 function cardOnClick(id, titolo, video, time, creator) {
-  if(event.target.tagName.toLowerCase() == "button"){
-    location.href="canale.php?canale=" + creator;
+  if (event.target.tagName.toLowerCase() == "button") {
+    location.href = "canale.php?canale=" + creator;
   } else {
-    location.href="video.php?id=" + id + "&titolo=" + titolo + "&video=" + video + "&time=" + time;
+    location.href = "video.php?id=" + id + "&titolo=" + titolo + "&video=" + video + "&time=" + time;
   }
 }
 
@@ -111,13 +111,16 @@ function cardOnClick(id, titolo, video, time, creator) {
 // CHAT
 // Invia un messaggio chat salvandolo nel db
 function sendMessageChat() {
+  if (event.key === 'Enter') {
     const chatID = urlParams.get('chatID');
     var message = document.getElementById('messageText').value;
+    document.getElementById('messageText').value = '';
     var formData = new FormData();
     formData.append("messageText", message);
     formData.append("chatID", chatID);
     postData('sendMessage.php', formData)
-        .then((res) => {
-        });
+      .then((res) => {
+      });
+  }
 }
 

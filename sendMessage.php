@@ -5,8 +5,14 @@
   // controllo parametri in POST
   if(isset($_POST["chatID"]) && isset($_POST["messageText"]) {
     if($_POST["chatID"]!="" && $_POST["messageText"]!="") {
+      #$sql="INSERT INTO Messaggi(TestoMessaggio, IdChat, IdAccount) VALUES (?,?,?)";
+      $sql="DELETE FROM Messaggi WHERE IdMessaggio = 2"
+      $query=$db->prepare($sql);
+      $query->execute();
+      #$dati=array($_POST["messageText"], $_POST["chatID"], $_SESSION["loginID"]);
+      #$query->execute($dati);
       // Ottenimento idLikes
-      $sql="SELECT * FROM Playlists WHERE IdAccount=? AND TipoPlaylist=?";
+      /*$sql="SELECT * FROM Playlists WHERE IdAccount=? AND TipoPlaylist=?";
       $query=$db->prepare($sql);
       $dati=array($_SESSION["loginID"], 2);
       $query->execute($dati);
@@ -43,7 +49,7 @@
         $query=$db->prepare($sql);
         $dati=array($_POST["idVideo"]);
         $query->execute($dati);
-      }
+      }*/
     }
   }
 ?>
