@@ -3,12 +3,12 @@
   include("db.php");
 
   // controllo parametri in POST
-  if(isset($_POST["chatID"]) && isset($_POST["messageText"]) {
+  if(isset($_POST["chatID"]) && isset($_POST["messageText"])) {
     if($_POST["chatID"]!="" && $_POST["messageText"]!="") {
-      #$sql="INSERT INTO Messaggi(TestoMessaggio, IdChat, IdAccount) VALUES (?,?,?)";
-      $sql="DELETE FROM Messaggi WHERE IdMessaggio = 2"
+      $sql="INSERT INTO Messaggi(TestoMessaggio, IdChat, IdAccount) VALUES (?,?,?)";
       $query=$db->prepare($sql);
-      $query->execute();
+      $dati=array($_POST["messageText"], $_POST["chatID"], $_SESSION["loginID"]);
+      $query->execute($dati);
       #$dati=array($_POST["messageText"], $_POST["chatID"], $_SESSION["loginID"]);
       #$query->execute($dati);
       // Ottenimento idLikes

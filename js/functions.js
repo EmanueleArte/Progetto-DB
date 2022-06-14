@@ -136,8 +136,8 @@ function sendMessageChat() {
     formData.append("messageText", message);
     formData.append("chatID", chatID);
     postData('sendMessage.php', formData)
-      .then((res) => {
-      });
+    .then((res) => {
+    });
   }
 }
 
