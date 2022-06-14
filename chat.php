@@ -26,9 +26,9 @@
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center h-100">
-      <div id="chatLeft" class="col-4 float-left h-100">
+      <div id="chatLeft" class="col-3 float-left h-100">
         <h2 class="titleText mt-3">Chat</h2>
-        <div id="chats" class="column">
+        <div id="chats" class="column" style="overflow: auto">
         <?php
           // Chat aperte
           $sql="SELECT * FROM Chats c WHERE c.IdAccount1=".$_SESSION["loginID"]." OR c.IdAccount2=".$_SESSION["loginID"];
@@ -70,7 +70,7 @@
         ?>
         </div>
         </div>
-        <div id="chatRight" class="container-fluid row col-8 float-right h-100 mb-3">
+        <div id="chatRight" class="container-fluid row col-9 float-right h-100 mb-3">
         <?php
           // Messaggi chat
           if(isset($_GET["chatID"])){
