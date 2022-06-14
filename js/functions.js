@@ -123,6 +123,16 @@ function additionalTag() {
 
 
 
+// Switch tra playlist likes pubblica e privata
+function switchLikesPubbl() {
+  var switchPubbl=document.getElementById("likesSwitch").checked;
+  var formData = new FormData();
+  formData.append("pubblica", switchPubbl);
+  postData('likesPubblica.php', formData);
+}
+
+
+
 // Click della card del video o del bottone del canale
 function cardOnClick(id, titolo, video, time, creator) {
   if (event.target.tagName.toLowerCase() == "button") {
@@ -132,7 +142,7 @@ function cardOnClick(id, titolo, video, time, creator) {
   }
 }
 
-// mostra e nasconde i contenuti della home
+// Mostra e nasconde i contenuti della home
 function switchContent() {
   const contentSwitch=document.getElementById("contentSwitch");
   var tuttiPost=document.getElementById("postScrittiTutti");

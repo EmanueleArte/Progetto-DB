@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- icona + titolo -->
   <link rel="icon" href="">
-  <title>Sito streaming</title>
+  <title>Sito streaming - Info</title>
   <!-- fogli di stile esterni + bootstrap -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom_style.css">
@@ -52,9 +52,9 @@
             echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="confirmChannel()">Attiva canale</button>';
           }
 
-          // Canale più simile a me per video piaciuti
-          echo '<div>Canale più simile a me per video piaciuti:';
-          $sql="SELECT Username, count(a1.IdAccount) AS num FROM Accounts a1, Playlists p1, Composizioni_playlists c1 WHERE a1.IdAccount=p1.IdAccount AND p1.IdPlaylist=c1.IdPlaylist AND a1.Canale=1 AND p1.TipoPlaylist=2 
+          // Canale più simile a me per video piaciuti (se la playlist video piaciuti è pubblica)
+          echo '<div>Account più simile a te per video piaciuti:';
+          $sql="SELECT Username, Canale, count(a1.IdAccount) AS num FROM Accounts a1, Playlists p1, Composizioni_playlists c1 WHERE a1.IdAccount=p1.IdAccount AND p1.IdPlaylist=c1.IdPlaylist AND p1.Pubblica=1 AND p1.TipoPlaylist=2 
                 AND a1.IdAccount!=? AND c1.IdVideo=ANY(SELECT c2.IdVideo FROM Playlists p2, Composizioni_playlists c2 WHERE p2.IdPlaylist=c2.IdPlaylist AND p2.TipoPlaylist=2 AND p2.IdAccount=?)
                 GROUP BY a1.IdAccount ORDER BY num DESC LIMIT 1";
           $query=$db->prepare($sql);
@@ -62,12 +62,32 @@
           $query->execute($dati);
           $ris=$query->fetchAll();
           if(count($ris)==0) {
-            echo '<p class="text-muted">Non hai video piaciuti.</p>';
+            echo '<p class="text-muted">Non ci sono account con i tuoi stessi interessi.</p>';
           }
+          $pubbl="";
           foreach($ris as $row) {
-            echo '<div class="mt-2 mb-2"><button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"].$row["num"] .'</button></div>';
+            if($row["Canale"]) {
+              echo '<div class="mt-2 mb-2"><button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button></div>';
+            } else {
+              echo '<div class="mt-2 mb-2"><button type="button" class="btn btn-outline-primary btn-sm">'. $row["Username"] .'</button></div>';
+            }
           }
           echo '</div>';
+          $sql="SELECT * FROM Playlists WHERE IdAccount=? AND TipoPlaylist=2";
+          $query=$db->prepare($sql);
+          $dati=array($_SESSION["loginID"]);
+          $query->execute($dati);
+          $ris=$query->fetchAll();
+          foreach($ris as $row) {
+            if($row["Pubblica"]) {
+              $pubbl="checked";
+            }
+          }
+          // Switch playlist likes pubblica
+          echo '<div class="custom-control custom-switch mb-2">
+                  <input type="checkbox" class="custom-control-input" id="likesSwitch" onclick="switchLikesPubbl()" '. $pubbl .'>
+                  <label class="custom-control-label" id="likesSwitchLabel" for="likesSwitch">Playlist video piaciuti pubblica</label>
+                </div>';
           
           // Canali seguiti
           echo '<div>Canali seguiti:<div>';

@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- icona + titolo -->
   <link rel="icon" href="">
-  <title>Sito streaming</title>
+  <title>Sito streaming - Video piaciuti</title>
   <!-- fogli di stile esterni + bootstrap -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom_style.css">
@@ -25,6 +25,15 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-10">
+      <form method="POST" class="mt-2" style="width: 100%" action="video_piaciuti.php">
+          <!-- RICERCA IN VIDEO PIACIUTI -->
+          <div class="row align-items-center justify-content-center">
+            <div class="form-group col-7 mt-3">
+              <input type="text" id="cerca" class="form-control" name="cerca" placeholder="Inserisci titolo video">
+            </div>
+            <button id="bottoneCerca" class="btn btn-primary" value="">Cerca in video piaciuti</button>
+          </div>
+        </form>
         <h2 class="titleText mt-3">Video</h2>
         <div id="cronologia" class="row">
         <?php
@@ -38,10 +47,16 @@
           foreach($ris as $row) {
             $idLikes=$row["IdPlaylist"];
           }
-          // Ottenimento cronologia
+          // Ottenimento likes
           $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE IdVideo IN (SELECT IdVideo FROM Composizioni_playlists WHERE IdPlaylist=?)";
-          $query=$db->prepare($sql);
           $dati=array($idLikes);
+          if(isset($_POST["cerca"])) {
+            if($_POST["cerca"]!="") {
+              $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE v.Titolo LIKE ? AND IdVideo IN (SELECT IdVideo FROM Composizioni_playlists WHERE IdPlaylist=?)";
+              $dati=array("%".$_POST["cerca"]."%", $idLikes);
+            }
+          }
+          $query=$db->prepare($sql);
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
