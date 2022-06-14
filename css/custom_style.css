@@ -75,7 +75,7 @@ body {
 	/*transition: all .2s ease-in-out;*/
 }
 
-.btn,.form-control {
+.btn,.form-control,.custom-select {
   border-radius: 2rem;
 }
 

@@ -86,23 +86,31 @@
           <div class="input-group pb-3 pt-1">
             <input type="text" id="linkVideo" class="form-control" name="link" placeholder="Id link video" required>
           </div>
+          <!-- ETICHETTE -->
+          <div class="input-group pb-3 pt-1" id="etichette">
+            <select class="custom-select" id="select" name="etichetta[]">
+              <option value="-1" selected>Scegli...</option>
+              <?php
+                // Ottengo etichette
+                $sql="SELECT * FROM Etichette";
+                $query=$db->prepare($sql);
+                $query->execute();
+                $ris=$query->fetchAll();
+                foreach($ris as $row) {
+                  echo '<option value="'. $row["IdEtichetta"] .'">'. $row["NomeEtichetta"] .'</option>';
+                }
+              ?>
+            </select>
+          </div>
           <button id="btnPostV" class="btn btn-primary mt-2">Pubblica</button>
         </form>
       </div>
     </div>
   </div>
 
-  <script src="js/functions.js">
-    function switchType(radio) {
-      alert("click");
-      /*if(radio=="S") {
-        document.getElementById("postVideo").style.display="none";
-        document.getElementById("postScritto").style.display="block";
-      } else {
-        document.getElementById("postVideo").style.display="block";
-        document.getElementById("postScritto").style.display="none";
-      }*/
-    }
+  <script src="js/functions.js"></script>
+  <script>
+    setInterval(additionalTag, 100);
   </script>
   
   <!-- js per bootstrap -->

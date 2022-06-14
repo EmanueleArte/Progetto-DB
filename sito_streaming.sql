@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:8889
--- Creato il: Giu 13, 2022 alle 17:19
+-- Creato il: Giu 14, 2022 alle 11:14
 -- Versione del server: 5.7.34
 -- Versione PHP: 7.4.21
 
@@ -42,9 +42,9 @@ CREATE TABLE `accounts` (
 
 INSERT INTO `accounts` (`IdAccount`, `Username`, `Mail`, `Password`, `Canale`, `NumeroIscritti`) VALUES
 (6, 'Molly', 'micia@sium.it', '$2y$10$WCuwQF.JFT8q5nDG4rLIE.l/AtFYINoTa7gQ5Qq0ThniLMpiCnrbC', 1, 0),
-(7, 'Lollo', 'boh@alaal.com', '$2y$10$d/E5CvjfXB20YzZhFm0zIeqsB8gHZgwJ/r7X17fyiqVo79Hq51up.', 1, 0),
+(7, 'Lollo', 'boh@alaal.com', '$2y$10$d/E5CvjfXB20YzZhFm0zIeqsB8gHZgwJ/r7X17fyiqVo79Hq51up.', 1, 1),
 (8, 'provini', 'prova@provini.it', '$2y$10$tOjZhA8hACnFkz2MX2w0OOx0CDMRkLLqh7Bek387b97tUTk7NBo06', 0, NULL),
-(9, 'drake', 'drake@drake.com', '$2y$10$nQfbweQ4MWwmSgUZ/hAJzutFUpWokyL/WMlqLmAOtJaXvrUKHs5LS', 1, 0);
+(9, 'drake', 'drake@drake.com', '$2y$10$nQfbweQ4MWwmSgUZ/hAJzutFUpWokyL/WMlqLmAOtJaXvrUKHs5LS', 1, 1);
 
 -- --------------------------------------------------------
 
@@ -122,7 +122,6 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (4, 1),
 (5, 1),
 (6, 1),
-(4, 2),
 (6, 2),
 (3, 3),
 (4, 3),
@@ -174,7 +173,8 @@ CREATE TABLE `iscrizioni` (
 --
 
 INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
-(9, 6, '2022-06-13 19:18:15');
+(7, 6, '2022-06-14 11:43:34'),
+(9, 6, '2022-06-14 13:13:04');
 
 -- --------------------------------------------------------
 
@@ -185,7 +185,7 @@ INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
 CREATE TABLE `messaggi` (
   `IdMessaggio` int(11) NOT NULL,
   `TestoMessaggio` varchar(200) NOT NULL,
-  `DataInvio` date NOT NULL,
+  `DataInvio` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `IdChat` int(11) DEFAULT NULL,
   `IdGruppo` int(11) DEFAULT NULL,
   `IdAccount` int(11) NOT NULL
@@ -196,7 +196,8 @@ CREATE TABLE `messaggi` (
 --
 
 INSERT INTO `messaggi` (`IdMessaggio`, `TestoMessaggio`, `DataInvio`, `IdChat`, `IdGruppo`, `IdAccount`) VALUES
-(1, 'Ciao Molly', '2022-06-09', 2, NULL, 9);
+(1, 'Ciao Molly', '2022-06-09 00:00:00', 2, NULL, 9),
+(2, 'prova', '2022-06-14 13:07:56', 2, NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -274,7 +275,7 @@ CREATE TABLE `video` (
 
 INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, `NumeroLike`, `NumeroVisualizzazioni`, `IdAccount`) VALUES
 (3, 'Believer - Imagine Dragons', '7wtfhZwyrcc', '2022-06-09 18:50:43', 1, 2, 6),
-(4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 3, 3, 6),
+(4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 2, 3, 6),
 (5, ' Forget me too - Machine Gun Kelly ft. Halsey', '0tn6nWYNK3Q', '2022-06-13 10:35:37', 1, 2, 6),
 (6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 2, 2, 9);
 
@@ -295,10 +296,10 @@ CREATE TABLE `visualizzazioni` (
 --
 
 INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) VALUES
-(6, 3, 71),
-(6, 4, 130),
-(6, 5, 58),
-(6, 6, 33),
+(6, 3, 72),
+(6, 4, 133),
+(6, 5, 59),
+(6, 6, 23),
 (7, 3, 80),
 (7, 4, 0),
 (9, 4, 18),
@@ -447,7 +448,7 @@ ALTER TABLE `gruppi`
 -- AUTO_INCREMENT per la tabella `messaggi`
 --
 ALTER TABLE `messaggi`
-  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT per la tabella `playlists`

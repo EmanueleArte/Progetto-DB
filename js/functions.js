@@ -41,12 +41,14 @@ function saveVisual() {
   var formData = new FormData();
   formData.append("idVideo", videoID);
   formData.append("tempoVis", getCurrTime());
-  urlParams.set("time", getCurrTime());
+  formData.append("durata", player.getDuration());
   postData('save_visualiz.php', formData);
 }
 
+// Avvia il video dal secondo giusto
 function videoReady() {
   if (tempoVis != -1) player.seekTo(tempoVis, true);
+  player.playVideo();
   setInterval(saveVisual, 1000);
 }
 
@@ -90,6 +92,33 @@ function addLikeVideo(idLike) {
   postData('likeVideo.php', formData)
     .then((res) => {
     });
+}
+
+
+
+// Aggiunge una scelta etichetta aggiuntiva al form (massimo 3)
+var nEtichette=1;
+const groupBase=document.getElementById("etichette").innerHTML;
+function additionalTag() {
+  var group=document.getElementById("etichette");
+  var selects=document.getElementsByClassName("custom-select");
+  var cont=0;
+  var values=new Array();
+  for(var select of selects) {
+    if(select.value!="-1") {
+      cont++;
+      values.push(select.value);
+    }
+  }
+  if(nEtichette<3 && cont==selects.length) {
+    group.innerHTML+=groupBase;
+    selects=document.getElementsByClassName("custom-select");
+    var i=0;
+    for(var i=0; i<selects.length-1; i++) {
+      selects[i].value=values[i];
+    }
+    nEtichette++;
+  }
 }
 
 
