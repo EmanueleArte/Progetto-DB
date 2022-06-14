@@ -53,9 +53,11 @@
           }
         ?>
           <div class="form-group w-100 mb-3">
-            <p>Inizia un nuova chat</p>
-            <input type="text" id="createChatText" class="form-control" onkeydown="createChat(this)" placeholder="Username" required>
-          </div>';
+            <p>Inizia una nuova chat</p>
+            <input type="text" id="createChatText" class="form-control" onkeydown="new function(){
+              if(event.key === 'Enter') window.location.href='chat.php?username='+document.getElementById('createChatText').value;
+            }" placeholder="Username" required>
+          </div>
         </div>
         <h2 class="titleText mt-3">Gruppi</h2>
         <div id="groups" class="column" style="overflow: auto">
@@ -75,6 +77,7 @@
                       <h5 class="card-title">'.$risAltro["NomeGruppo"].'</h5>
                     </div>
                   </div>';
+            echo '<button type="button" class="btn btn-primary ml-4" onclick="location.href=\'creazioneGruppo.php\'">Nuovo Gruppo</button>';
           }
         ?>
         </div>
@@ -238,15 +241,15 @@
                 header("location: chat.php?chatID=".$ris1["IdChat"]);
               } else if($ris2 != null && $ris2!=""){
                 header("location: chat.php?chatID=".$ris2["IdChat"]);
-              } else{
+              } else if($id != $_SESSION["loginID"]){
                 $sql="INSERT INTO Chats(IdAccount1, IdAccount2) VALUES (?,?)";
                 $query=$db->prepare($sql);
                 $dati=array($_SESSION["loginID"], $id);
                 $query->execute($dati);
-                /*$sql="SELECT LAST_INSERT_ID()";
+                $sql="SELECT LAST_INSERT_ID()";
                 $query=$db->prepare($sql);
                 $ris=$query->execute();
-                header("location: chat.php?chatID=".$ris);*/
+                header("location: chat.php?username=".$_GET["username"]);
               }
             }
           }

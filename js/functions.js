@@ -207,14 +207,16 @@ function sendMessageGroup() {
   }
 }
 
-function createChat(userContainer) {
+/*function createChat() {
   if (event.key === 'Enter') {
-    const username = userContainer.value;
+    document.getElementById('messageText').setAttribute('onkeydown', 'sendMessageChat()');
+    var username = document.getElementById('messageText').value;
+    document.getElementById('messageText').value = '';
     var formData = new FormData();
     formData.append("username", username);
     postData('createChat.php', formData)
       .then((res) => {
-        window.location.href = 'chat.php';
+        //window.location.href = 'chat.php';
       });
   }
-}
+}*/
