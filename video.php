@@ -73,7 +73,18 @@
                       <p class="text-muted mr-3">Pubblicato il: '. $row["DataPubblicazione"] .' da: <button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button><br></p>
                       <p id="nLike" class="'. $classLike .'">'. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3" onclick="addLikeVideo(\'nLike\')"></i></p>
                       <p id="nVis">'. $vis .' <i class="fa fa-eye"></i></p>
-                    </p>';
+                    </p></div>';
+              // Etichette video
+              $sql="SELECT * FROM Etichette e JOIN Categorizzazioni_video c ON e.IdEtichetta=c.IdEtichetta WHERE c.IdVideo=?";
+              $query=$db->prepare($sql);
+              $dati=array($row["IdVideo"]);
+              $query->execute($dati);
+              $risC=$query->fetchAll();
+              echo '<div class="row ml-2"><p>Etichette: ';
+              foreach($risC as $etichetta) {
+                echo '<span class="badge badge-pill badge-success mr-1">'. $etichetta["NomeEtichetta"] .'</span>';
+              }
+              echo '</p>';
             }
           ?>
         </div>
