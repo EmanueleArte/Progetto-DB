@@ -169,7 +169,7 @@
 
   <script src="js/functions.js"></script>
   <script>
-    setInterval(switchContent, 500);
+    setInterval(switchContent, 300);
   </script>
   
   <!-- js per bootstrap -->

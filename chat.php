@@ -96,7 +96,7 @@
               $query->execute();
               $ris=$query->fetch();
               echo '<h2 class="titleText mt-3">'.$ris["Username"].'</h2>
-                    <div id="messagesField" class="row w-100" style="height: 70%; overflow: auto">';
+                    <div id="messagesField" class="row w-100 pl-3 pr-3 pt-3" style="height: 69%; overflow: auto">';
               // Trovo i messaggi appartenenti alla chat
               $sql="SELECT * FROM Messaggi WHERE IdChat=".$id." ORDER BY DataInvio";
               $query=$db->prepare($sql);
@@ -106,7 +106,7 @@
                 if($msg["IdAccount"] != $_SESSION["loginID"]){
                   // Messaggio inviato dall'altro
                   echo '<div class="w-100">
-                          <div class="card m-2 w-auto" style="display:inline-block">
+                          <div class="card mb-2 w-auto" style="display:inline-block">
                             <div class="card-body w-auto">
                               <p class="card-text" style="display:inline-block">
                                 '.$msg["TestoMessaggio"].'
@@ -118,7 +118,7 @@
                 } else {
                   // Messaggio inviato da s� stessi
                   echo '<div class="w-100">
-                          <div class="card m-2 w-auto float-right bg-light" style="display:inline-block">
+                          <div class="card mb-2 w-auto float-right bg-light" style="display:inline-block">
                             <div class="card-body w-auto">
                               <p class="card-text float-right" style="display:inline-block; text-align:right">
                                 '.$msg["TestoMessaggio"].'
@@ -160,14 +160,15 @@
                 $query=$db->prepare($sql);
                 $query->execute();
                 $ris=$query->fetchAll();
-                echo '<div class="d-flex flex-row-reverse w-100">';
+                echo '<div class="d-flex w-100" style="height: 3%">Membri:&nbsp';
                 foreach($ris as $key=>$row) {
-                  echo '<p>'. $row["Username"];
-                  if($key > 0) echo ',&nbsp';
-                  echo '</p>';
+                  echo '<span class="badge badge-pill badge-primary mr-1">'. $row["Username"] .'</span>';
+                  /*echo '<p>'. $row["Username"];
+                  if($key > -1) echo ',&nbsp';
+                  echo '</p>';*/
                 }
                 echo '</div>
-                      <div id="messagesField" class="row w-100" style="height: 60%; overflow: auto">';
+                      <div id="messagesField" class="row w-100 pl-3 pr-3 pt-3" style="height: 60%; overflow: auto">';
                 // Trovo i messaggi appartenenti al gruppo
                 $sql="SELECT * FROM Messaggi m, Accounts a WHERE a.IdAccount = m.IdAccount AND m.IdGruppo=".$idGruppo." ORDER BY m.DataInvio";
                 $query=$db->prepare($sql);
@@ -177,7 +178,7 @@
                   if($msg["IdAccount"] != $_SESSION["loginID"]){
                     // Messaggio inviato da altri
                     echo '<div class="w-100">
-                            <div class="card m-3 w-auto" style="display:inline-block">
+                            <div class="card mb-2 w-auto" style="display:inline-block">
                               <div class="card-body w-auto">
                                 <small class="text-muted">'. $msg["Username"] .'</small><br>
                                 <p class="card-text" style="display:inline-block">
@@ -190,7 +191,7 @@
                   } else {
                     // Messaggio inviato da s� stessi
                     echo '<div class="w-100">
-                            <div class="card m-3 w-auto float-right bg-light" style="display:inline-block; text-align:right">
+                            <div class="card mb-2 w-auto float-right bg-light" style="display:inline-block; text-align:right">
                               <div class="card-body w-auto">
                                 <p class="card-text float-right" style="display:inline-block text-align:center">
                                   '.$msg["TestoMessaggio"].'
