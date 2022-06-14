@@ -170,3 +170,18 @@ function sendMessageChat() {
   }
 }
 
+// Invia un messaggio a un gruppo salvandolo nel db
+function sendMessageGroup() {
+  if (event.key === 'Enter') {
+    const groupID = urlParams.get('groupID');
+    var message = document.getElementById('messageText').value;
+    document.getElementById('messageText').value = '';
+    var formData = new FormData();
+    formData.append("messageText", message);
+    formData.append("groupID", groupID);
+    postData('sendMessage.php', formData)
+      .then((res) => {
+      });
+  }
+}
+

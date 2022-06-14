@@ -3,53 +3,21 @@
   include("db.php");
 
   // controllo parametri in POST
-  if(isset($_POST["chatID"]) && isset($_POST["messageText"])) {
-    if($_POST["chatID"]!="" && $_POST["messageText"]!="") {
-      $sql="INSERT INTO Messaggi(TestoMessaggio, IdChat, IdAccount) VALUES (?,?,?)";
-      $query=$db->prepare($sql);
-      $dati=array($_POST["messageText"], $_POST["chatID"], $_SESSION["loginID"]);
-      $query->execute($dati);
-      #$dati=array($_POST["messageText"], $_POST["chatID"], $_SESSION["loginID"]);
-      #$query->execute($dati);
-      // Ottenimento idLikes
-      /*$sql="SELECT * FROM Playlists WHERE IdAccount=? AND TipoPlaylist=?";
-      $query=$db->prepare($sql);
-      $dati=array($_SESSION["loginID"], 2);
-      $query->execute($dati);
-      $ris=$query->fetchAll();
-      $idLikes;
-      foreach($ris as $row) {
-        $idLikes=$row["IdPlaylist"];
+  if(isset($_POST["messageText"])) {
+    if(isset($_POST["chatID"])) {
+      if($_POST["chatID"]!="" && $_POST["messageText"]!="") {
+        $sql="INSERT INTO Messaggi(TestoMessaggio, IdChat, IdAccount) VALUES (?,?,?)";
+        $query=$db->prepare($sql);
+        $dati=array($_POST["messageText"], $_POST["chatID"], $_SESSION["loginID"]);
+        $query->execute($dati);
       }
-      // Controlla se il video è già tra i piaciuti
-      $sql="SELECT * FROM Composizioni_playlists WHERE IdPlaylist=? AND IdVideo=?";
-      $query=$db->prepare($sql);
-      $dati=array($idLikes, $_POST["idVideo"]);
-      $query->execute($dati);
-      $ris=$query->fetchAll();
-      if (count($ris)>0) {
-        // Eliminazione da video piaciuti
-        $sql="DELETE FROM Composizioni_playlists WHERE IdPlaylist=? AND IdVideo=?";
+    } else if(isset($_POST["groupID"])) {
+      if($_POST["groupID"]!="" && $_POST["messageText"]!="") {
+        $sql="INSERT INTO Messaggi(TestoMessaggio, IdGruppo, IdAccount) VALUES (?,?,?)";
         $query=$db->prepare($sql);
-        $dati=array($idLikes, $_POST["idVideo"]);
+        $dati=array($_POST["messageText"], $_POST["groupID"], $_SESSION["loginID"]);
         $query->execute($dati);
-        // Decrementa NumeroLike
-        $sql="UPDATE Video SET NumeroLike=NumeroLike-1 WHERE IdVideo=?";
-        $query=$db->prepare($sql);
-        $dati=array($_POST["idVideo"]);
-        $query->execute($dati);
-      } else {
-        // Aggiunta a video piaciuti
-        $sql="INSERT INTO Composizioni_playlists(IdPlaylist, IdVideo) VALUES (?,?)";
-        $query=$db->prepare($sql);
-        $dati=array($idLikes, $_POST["idVideo"]);
-        $query->execute($dati);
-        // Incrementa NumeroLike
-        $sql="UPDATE Video SET NumeroLike=NumeroLike+1 WHERE IdVideo=?";
-        $query=$db->prepare($sql);
-        $dati=array($_POST["idVideo"]);
-        $query->execute($dati);
-      }*/
+      }
     }
   }
 ?>
