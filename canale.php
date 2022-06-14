@@ -57,7 +57,9 @@
           if(count($ris)>0) {
             echo '<button type="button" class="btn btn-primary ml-4" onclick="location.href=\'iscrizione.php?canale='. $_GET["canale"] .'&iscrizione=0\'">Iscritto</button>';
           } else {
-            echo '<button type="button" class="btn btn-outline-primary ml-4" onclick="location.href=\'iscrizione.php?canale='. $_GET["canale"] .'&iscrizione=1\'">Iscriviti</button>';
+            if($row["IdAccount"]!=$_SESSION["loginID"]) {
+              echo '<button type="button" class="btn btn-outline-primary ml-4" onclick="location.href=\'iscrizione.php?canale='. $_GET["canale"] .'&iscrizione=1\'">Iscriviti</button>';
+            }
           }
         ?>
         </h4>

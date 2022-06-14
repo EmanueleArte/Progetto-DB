@@ -42,9 +42,8 @@ function saveVisual() {
   formData.append("idVideo", videoID);
   formData.append("tempoVis", getCurrTime());
   urlParams.set("time", getCurrTime());
-  //window.location.search=urlParams.toString();
   postData('save_visualiz.php', formData)
-  .then((res)=>{
+  .then((data)=>{
   });
 }
 

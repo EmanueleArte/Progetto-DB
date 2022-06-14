@@ -39,6 +39,7 @@
       <?php
         $canaleStr="No";
         if($canale) $canaleStr="Sì";
+        // Dati base
         foreach($ris as $row) {
           echo '<div class="mb-2">Username: '. $row["Username"] .'</div>
                 <div class="mb-2">Mail: '. $row["Mail"] .'</div>
@@ -50,6 +51,35 @@
           } else {
             echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="confirmChannel()">Attiva canale</button>';
           }
+
+          // Canale più simile a me per video piaciuti
+          echo '<div>Canale più simile a me per video piaciuti:';
+          $sql="SELECT Username, count(a1.IdAccount) AS num FROM Accounts a1, Playlists p1, Composizioni_playlists c1 WHERE a1.IdAccount=p1.IdAccount AND p1.IdPlaylist=c1.IdPlaylist AND a1.Canale=1 AND p1.TipoPlaylist=2 
+                AND a1.IdAccount!=? AND c1.IdVideo=ANY(SELECT c2.IdVideo FROM Playlists p2, Composizioni_playlists c2 WHERE p2.IdPlaylist=c2.IdPlaylist AND p2.TipoPlaylist=2 AND p2.IdAccount=?)
+                GROUP BY a1.IdAccount ORDER BY num DESC LIMIT 1";
+          $query=$db->prepare($sql);
+          $dati=array($_SESSION["loginID"], $_SESSION["loginID"]);
+          $query->execute($dati);
+          $ris=$query->fetchAll();
+          if(count($ris)==0) {
+            echo '<p class="text-muted">Non hai video piaciuti.</p>';
+          }
+          foreach($ris as $row) {
+            echo '<div class="mt-2 mb-2"><button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"].$row["num"] .'</button></div>';
+          }
+          echo '</div>';
+          
+          // Canali seguiti
+          echo '<div>Canali seguiti:<div>';
+          $sql="SELECT * FROM Accounts a, Iscrizioni i WHERE a.IdAccount=i.IdCanale AND i.IdIscritto=?";
+          $query=$db->prepare($sql);
+          $dati=array($_SESSION["loginID"]);
+          $query->execute($dati);
+          $ris=$query->fetchAll();
+          foreach($ris as $row) {
+            echo '<button type="button" class="btn btn-outline-primary btn-sm mr-3 mt-2" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button>';
+          }
+          echo '</div></div>';
         }
       ?>
       </div>
