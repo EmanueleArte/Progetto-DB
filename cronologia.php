@@ -25,6 +25,15 @@
     </div>
     <div class="row justify-content-center">
       <div class="col-10">
+          <form method="POST" class="mt-2" style="width: 100%" action="cronologia.php">
+            <!-- RICERCA IN CRONOLOGIA -->
+            <div class="row align-items-center justify-content-center">
+              <div class="form-group col-7 mt-3">
+                <input type="text" id="cerca" class="form-control" name="cerca" placeholder="Inserisci titolo video">
+              </div>
+              <button id="bottoneCerca" class="btn btn-primary" value="">Cerca in cronologia</button>
+            </div>
+          </form>
         <h2 class="titleText mt-3">Cronologia</h2>
         <div id="cronologia" class="row">
         <?php
@@ -40,8 +49,14 @@
           }
           // Ottenimento cronologia
           $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE IdVideo IN (SELECT IdVideo FROM Composizioni_playlists WHERE IdPlaylist=?)";
-          $query=$db->prepare($sql);
           $dati=array($idCronologia);
+          if(isset($_POST["cerca"])) {
+            if($_POST["cerca"]!="") {
+              $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE v.Titolo LIKE ? AND IdVideo IN (SELECT IdVideo FROM Composizioni_playlists WHERE IdPlaylist=?)";
+              $dati=array("%".$_POST["cerca"]."%", $idCronologia);
+            }
+          }
+          $query=$db->prepare($sql);
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
