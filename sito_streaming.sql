@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 14, 2022 alle 17:26
+-- Creato il: Giu 14, 2022 alle 20:16
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -109,7 +109,8 @@ CREATE TABLE `chats` (
 
 INSERT INTO `chats` (`IdChat`, `IdAccount1`, `IdAccount2`) VALUES
 (2, 6, 9),
-(3, 9, 10);
+(3, 9, 10),
+(5, 10, 6);
 
 -- --------------------------------------------------------
 
@@ -121,10 +122,19 @@ CREATE TABLE `commenti` (
   `IdCommento` int(11) NOT NULL,
   `IdAccount` int(11) NOT NULL,
   `TestoCommento` varchar(200) NOT NULL,
-  `DataCommento` date NOT NULL,
+  `DataCommento` datetime NOT NULL DEFAULT current_timestamp(),
   `IdPost` int(11) DEFAULT NULL,
   `IdVideo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `commenti`
+--
+
+INSERT INTO `commenti` (`IdCommento`, `IdAccount`, `TestoCommento`, `DataCommento`, `IdPost`, `IdVideo`) VALUES
+(1, 9, 'I gatti conquisteranno il mondo', '2022-06-14 18:07:09', NULL, 6),
+(2, 9, 'Questa ssssong sssspacca', '2022-06-14 18:18:21', NULL, 4),
+(3, 10, 'w i gatti, anche se a me piace solo dormire e mangiare', '2022-06-14 18:30:37', NULL, 6);
 
 -- --------------------------------------------------------
 
@@ -156,7 +166,10 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (5, 7),
 (5, 8),
 (6, 7),
-(6, 8);
+(6, 8),
+(6, 9),
+(6, 10),
+(9, 7);
 
 -- --------------------------------------------------------
 
@@ -226,7 +239,7 @@ CREATE TABLE `iscrizioni` (
 INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
 (6, 9, '2022-06-13 21:47:27'),
 (9, 6, '2022-06-13 19:18:15'),
-(9, 10, '2022-06-14 16:20:03');
+(9, 10, '2022-06-14 18:30:02');
 
 -- --------------------------------------------------------
 
@@ -317,7 +330,8 @@ INSERT INTO `post_scritti` (`IdPost`, `Titolo`, `DataPubblicazione`, `TestoPost`
 (4, 'Prova1', '2022-06-09 12:32:10', 'ciao', 6),
 (5, 'Tutto bello', '2022-06-11 11:43:56', 'Il sito vaaaaaa', 6),
 (6, 'ewfa', '2022-06-11 11:54:31', 'dfkjndskjdsnkdsk kasc.', 6),
-(7, 'Non sono Molly', '2022-06-13 10:38:41', 'siam', 7);
+(7, 'Non sono Molly', '2022-06-13 10:38:41', 'siam', 7),
+(8, 'Sofferenza', '2022-06-14 18:27:37', 'Non ho voglia di fare la creazione dei gruppi\r\nCiaooooooo <3', 9);
 
 -- --------------------------------------------------------
 
@@ -343,9 +357,9 @@ INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, 
 (3, 'Believer - Imagine Dragons', '7wtfhZwyrcc', '2022-06-09 18:50:43', 1, 3, 6),
 (4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 3, 3, 6),
 (5, ' Forget me too - Machine Gun Kelly ft. Halsey', '0tn6nWYNK3Q', '2022-06-13 10:35:37', 1, 2, 6),
-(6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 1, 1, 9),
+(6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 2, 2, 9),
 (8, 'Ferrari SF-90', 'lJcNhqdFo9M', '2022-06-14 16:24:30', 0, 1, 6),
-(9, 'Dentro la sede di Apple', 'UoYPP4fjN2c', '2022-06-14 17:07:45', 0, 1, 6);
+(9, 'Dentro la sede di Apple', 'UoYPP4fjN2c', '2022-06-14 17:07:45', 0, 2, 6);
 
 -- --------------------------------------------------------
 
@@ -370,9 +384,11 @@ INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) V
 (7, 3, 80),
 (7, 4, 0),
 (9, 3, 6),
-(9, 4, 37),
+(9, 4, 44),
 (9, 5, 3),
-(9, 6, 10);
+(9, 6, 10),
+(9, 9, 2),
+(10, 6, 40);
 
 --
 -- Indici per le tabelle scaricate
@@ -492,13 +508,13 @@ ALTER TABLE `accounts`
 -- AUTO_INCREMENT per la tabella `chats`
 --
 ALTER TABLE `chats`
-  MODIFY `IdChat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `IdChat` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT per la tabella `etichette`
@@ -516,7 +532,7 @@ ALTER TABLE `gruppi`
 -- AUTO_INCREMENT per la tabella `messaggi`
 --
 ALTER TABLE `messaggi`
-  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT per la tabella `playlists`
@@ -528,7 +544,7 @@ ALTER TABLE `playlists`
 -- AUTO_INCREMENT per la tabella `post_scritti`
 --
 ALTER TABLE `post_scritti`
-  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT per la tabella `video`
