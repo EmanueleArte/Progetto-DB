@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 15, 2022 alle 00:27
+-- Creato il: Giu 15, 2022 alle 12:55
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -66,7 +66,14 @@ CREATE TABLE `appartenenze_gruppi` (
 INSERT INTO `appartenenze_gruppi` (`IdGruppo`, `IdAccount`) VALUES
 (1, 6),
 (1, 9),
-(1, 10);
+(1, 10),
+(9, 9),
+(9, 10),
+(9, 11),
+(13, 6),
+(13, 9),
+(13, 10),
+(13, 11);
 
 -- --------------------------------------------------------
 
@@ -139,7 +146,8 @@ INSERT INTO `commenti` (`IdCommento`, `IdAccount`, `TestoCommento`, `DataComment
 (1, 9, 'I gatti conquisteranno il mondo', '2022-06-14 18:07:09', NULL, 6),
 (2, 9, 'Questa ssssong sssspacca', '2022-06-14 18:18:21', NULL, 4),
 (3, 10, 'w i gatti, anche se a me piace solo dormire e mangiare', '2022-06-14 18:30:37', NULL, 6),
-(4, 11, 'FFFFFFFFFFFFFFFFFFFFFFFFFFf', '2022-06-15 00:22:10', NULL, 6);
+(4, 11, 'FFFFFFFFFFFFFFFFFFFFFFFFFFf', '2022-06-15 00:22:10', NULL, 6),
+(5, 9, 'prova', '2022-06-15 12:51:35', NULL, 8);
 
 -- --------------------------------------------------------
 
@@ -176,6 +184,7 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (6, 10),
 (6, 11),
 (6, 12),
+(8, 7),
 (9, 7);
 
 -- --------------------------------------------------------
@@ -225,7 +234,9 @@ CREATE TABLE `gruppi` (
 --
 
 INSERT INTO `gruppi` (`IdGruppo`, `NomeGruppo`) VALUES
-(1, 'Pesci');
+(1, 'Pesci'),
+(9, 'Gruppo Prova'),
+(13, 'Gatti');
 
 -- --------------------------------------------------------
 
@@ -285,7 +296,12 @@ INSERT INTO `messaggi` (`IdMessaggio`, `TestoMessaggio`, `DataInvio`, `IdChat`, 
 (14, 'Comunque forse potremmo pensare di aumentare le dimensioni massime di un messaggio, mi sembra avessimo messo 200 caratteri ma non sono poi così tanti, soprattutto se scrivi un messaggio così', '2022-06-14 16:27:43', NULL, 1, 9),
 (16, 'Prova', '2022-06-14 20:23:11', 5, NULL, 10),
 (17, 'Ciao', '2022-06-15 00:09:09', 8, NULL, 10),
-(18, 'Mau', '2022-06-15 00:22:32', 11, NULL, 11);
+(18, 'Mau', '2022-06-15 00:22:32', 11, NULL, 11),
+(19, 'Ciao mici', '2022-06-15 12:48:55', NULL, 13, 9),
+(20, 'prova', '2022-06-15 12:50:07', NULL, 13, 9),
+(21, 'funziona', '2022-06-15 12:50:12', NULL, 13, 9),
+(22, 'yeeee', '2022-06-15 12:50:16', NULL, 13, 9),
+(23, 'Baghii', '2022-06-15 12:50:32', 11, NULL, 9);
 
 -- --------------------------------------------------------
 
@@ -371,7 +387,7 @@ INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, 
 (4, 'Sweet but psycho - Ava Max', 'WXBHCQYxwr0', '2022-06-11 10:48:27', 3, 3, 6),
 (5, ' Forget me too - Machine Gun Kelly ft. Halsey', '0tn6nWYNK3Q', '2022-06-13 10:35:37', 1, 2, 6),
 (6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 3, 3, 9),
-(8, 'Ferrari SF-90', 'lJcNhqdFo9M', '2022-06-14 16:24:30', 0, 1, 6),
+(8, 'Ferrari SF-90', 'lJcNhqdFo9M', '2022-06-14 16:24:30', 0, 2, 6),
 (9, 'Dentro la sede di Apple', 'UoYPP4fjN2c', '2022-06-14 17:07:45', 0, 2, 6);
 
 -- --------------------------------------------------------
@@ -400,6 +416,7 @@ INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) V
 (9, 4, 44),
 (9, 5, 3),
 (9, 6, 10),
+(9, 8, 17),
 (9, 9, 2),
 (10, 6, 40),
 (11, 6, 0);
@@ -528,7 +545,7 @@ ALTER TABLE `chats`
 -- AUTO_INCREMENT per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT per la tabella `etichette`
@@ -540,13 +557,13 @@ ALTER TABLE `etichette`
 -- AUTO_INCREMENT per la tabella `gruppi`
 --
 ALTER TABLE `gruppi`
-  MODIFY `IdGruppo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `IdGruppo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT per la tabella `messaggi`
 --
 ALTER TABLE `messaggi`
-  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT per la tabella `playlists`

@@ -172,6 +172,7 @@ function sendComment() {
     formData.append("videoID", videoID);
     postData('sendComment.php', formData)
       .then((res) => {
+        location.reload();
       });
   }
 }
@@ -187,7 +188,8 @@ function sendMessageChat() {
     formData.append("messageText", message);
     formData.append("chatID", chatID);
     postData('sendMessage.php', formData)
-    .then((res) => {
+      .then((res) => {
+        location.reload();
     });
   }
 }
@@ -203,8 +205,15 @@ function sendMessageGroup() {
     formData.append("groupID", groupID);
     postData('sendMessage.php', formData)
       .then((res) => {
+        location.reload();
       });
   }
+}
+
+function addAccountListSpace() {
+  var inputSpace = document.getElementById("firstAccountSpace").cloneNode();
+  inputSpace.value = '';
+  document.getElementById("accountsListContainer").appendChild(inputSpace);
 }
 
 /*function createChat() {
@@ -220,3 +229,15 @@ function sendMessageGroup() {
       });
   }
 }*/
+
+function createGroup() {
+  var usernameSpaces = document.getElementsByClassName('accountSpace');
+  var usernames = [];
+  for (let username of usernameSpaces) {
+    usernames.push(username.value);
+  }
+  console.log(usernames);
+  document.getElementById("hiddenUsernames").value = usernames;
+  console.log(document.getElementById("hiddenUsernames").value);
+  document.getElementById("createGroupForm").submit();
+}

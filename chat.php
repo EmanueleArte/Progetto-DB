@@ -77,8 +77,8 @@
                       <h5 class="card-title">'.$risAltro["NomeGruppo"].'</h5>
                     </div>
                   </div>';
-            echo '<button type="button" class="btn btn-primary ml-4" onclick="location.href=\'creazioneGruppo.php\'">Nuovo Gruppo</button>';
-          }
+            }
+          echo '<button type="button" class="btn btn-primary ml-4" onclick="location.href=\'creazioneGruppo.php\'">Nuovo Gruppo</button>';
         ?>
         </div>
         </div>
