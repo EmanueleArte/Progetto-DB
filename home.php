@@ -28,6 +28,7 @@
           echo '<button type="button" class="btn btn-outline-dark mr-3" onclick="location.href=\'create_post.php\'">Crea nuovo post</button>';
         }
       ?>
+      <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='creazionePlaylist.php'">Crea playlist</button>
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='top5.php'">Top 5</button>
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='info.php'">Info</button>
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='cronologia.php'">Cronologia</button>

@@ -42,20 +42,20 @@
     <form id="createGroupForm" method="post" action="createGroup.php">
       <input type="hidden" id="hiddenUsernames" name="usernames">
       <div class="row justify-content-center pb-3">
-        <div class="pb-3 col-4">
+        <div class="pb-2 col-4">
           <!-- NOME GRUPPO -->
           <p class="ml-2 text-center">Nome del gruppo:</p>
-          <div class="input-group pb-3">
+          <div class="input-group">
             <input type="text" id="groupName" class="form-control" name="groupName" placeholder="Nome Gruppo" required>
           </div>
         </div>
       </div>
-      <div class="row justify-content-center pb-3">
+      <div class="row justify-content-center">
         <div class="pb-3 col-4">
           <!-- UTENTI -->
           <p class="ml-2 text-center">Partecipanti:</p>
           <div id="accountsListContainer">
-            <input id="firstAccountSpace" type="text" class="accountSpace form-control mb-1" placeholder="Username" required>
+            <input id="firstAccountSpace" type="text" class="accountSpace form-control mb-3" placeholder="Username" required>
           </div>
           <div class="row justify-content-center pb-3">
             <button type="button" class="btn btn-primary" onclick="addAccountListSpace()">+</button>

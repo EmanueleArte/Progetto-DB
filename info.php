@@ -47,10 +47,11 @@
           if($canale) {
             echo '<div class="mb-2">Numero iscritti: '. $row["NumeroIscritti"] .'</div>';
             echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2 mr-3" onclick="location.href=\'miei_video.php\'">Miei video</button>';
-            echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="location.href=\'miei_post.php\'">Miei post</button>';
+            echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2 mr-3" onclick="location.href=\'miei_post.php\'">Miei post</button>';
           } else {
-            echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="confirmChannel()">Attiva canale</button>';
+            echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2 mr-3" onclick="confirmChannel()">Attiva canale</button>';
           }
+          echo '<button type="button" class="btn btn-outline-dark btn-sm mt-2 mb-2" onclick="location.href=\'mie_playlist.php\'">Mie playlist</button>';
 
           // Canale più simile a me per video piaciuti (se la playlist video piaciuti è pubblica)
           echo '<div>Account più simile a te per video piaciuti:';
