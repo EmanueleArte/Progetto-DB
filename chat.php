@@ -82,7 +82,7 @@
         ?>
         </div>
         </div>
-        <div id="chatRight" class="container-fluid row col-9 float-right h-100 mb-3">
+        <div id="chatRight" class="container-fluid row col-9 float-right h-100 mb-3 pl-5 pr-5">
         <?php
           // Messaggi chat
           if(isset($_GET["chatID"])){
