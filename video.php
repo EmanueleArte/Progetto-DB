@@ -72,7 +72,8 @@
               echo '<p>
                       <p class="text-muted mr-3">Pubblicato il: '. $row["DataPubblicazione"] .' da: <button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button><br></p>
                       <p id="nLike" class="'. $classLike .'">'. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3" onclick="addLikeVideo(\'nLike\')"></i></p>
-                      <p id="nVis">'. $vis .' <i class="fa fa-eye"></i></p>
+                      <p id="nVis" class="mr-2">'. $vis .' <i class="fa fa-eye"></i></p>
+                      <p><button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'aggiungi_a_playlist.php?id='. $_GET["id"] .'&titolo='. $_GET["titolo"] .'\'">Aggiungi a una playlist</button></p>
                     </p></div>';
               // Etichette video
               $sql="SELECT * FROM Etichette e JOIN Categorizzazioni_video c ON e.IdEtichetta=c.IdEtichetta WHERE c.IdVideo=?";

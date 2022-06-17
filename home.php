@@ -42,7 +42,7 @@
           <!-- RICERCA -->
           <div class="row align-items-center justify-content-center">
             <div class="form-group col-7 mt-3">
-              <input type="text" id="cerca" class="form-control" name="cerca" placeholder="Inserisci nome canale o titolo video" required>
+              <input type="text" id="cerca" class="form-control" name="cerca" placeholder="Inserisci nome canale, titolo video o nome playlist" required>
             </div>
             <button id="bottoneCerca" class="btn btn-primary" value="">Cerca</button>
           </div>

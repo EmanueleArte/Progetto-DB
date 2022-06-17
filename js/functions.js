@@ -132,6 +132,10 @@ function switchLikesPubbl() {
 }
 
 
+// Click della card delle playlist
+function cardOnClickPlaylist(id, nomePlaylist) {
+    location.href = "playlist.php?id=" + id + "&nome=" + nomePlaylist;
+}
 
 // Click della card del video o del bottone del canale
 function cardOnClick(id, titolo, video, time, creator) {
@@ -172,7 +176,11 @@ function sendComment() {
     formData.append("videoID", videoID);
     postData('sendComment.php', formData)
       .then((res) => {
-        location.reload();
+        var queryS = window.location.search;
+        var urlP = new URLSearchParams(queryS);
+        urlP.set("time", getCurrTime());
+        location.href="video.php?"+urlP.toString().replaceAll("+", " ");
+        //location.reload();
       });
   }
 }

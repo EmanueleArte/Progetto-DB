@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- icona + titolo -->
   <link rel="icon" href="">
-  <title>Sito streaming - Mie playlist</title>
+  <title>Sito streaming - Playlist</title>
   <!-- fogli di stile esterni + bootstrap -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom_style.css">
@@ -26,24 +26,38 @@
       <button type="button" class="btn btn-outline-dark mr-3" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center">
+      <h2 class="titleText mt-3"><?php echo $_GET["nome"]; ?></h2>
+    </div>
+    <div class="row justify-content-center">
       <div id="homePosts" class="col-10">
-        <h2 class="titleText mt-3">Mie Playlist</h2>
+        <h2 class="titleText mt-3">Video presenti</h2>
         <div class="row">
         <?php
-          // Dati delle playlist
-          $sql="SELECT *, (SELECT count(*) FROM Playlists p2 JOIN Composizioni_playlists c ON c.IdPlaylist=p2.IdPlaylist WHERE c.IdPlaylist=p.IdPlaylist) AS numVid 
-                FROM Playlists p, Accounts a WHERE a.IdAccount=p.IdAccount AND a.IdAccount=? AND p.TipoPlaylist=3";
+          // Dati dei video della playlist
+          $sql="SELECT * FROM Video v, Composizioni_playlists c, Accounts a WHERE c.IdVideo=v.IdVideo AND a.IdAccount=v.IdAccount AND c.IdPlaylist=? ORDER BY v.DataPubblicazione DESC";
           $query=$db->prepare($sql);
-          $dati=array($_SESSION["loginID"]);
+          $dati=array($_GET["id"]);
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
-            echo '<div class="card m-3 card-playlist" style="width: 16rem;" onclick="cardOnClickPlaylist(\''. $row["IdPlaylist"] .'\',\''. $row["NomePlaylist"] .'\')">
-                    <div class="card-body card-playlist">
-                      <h5 class="card-title card-playlist">'. $row["NomePlaylist"] .'</h5>
-                      <p class="card-text card-playlist">
-                        <small class="text-muted">Pubblica: '. $row["Pubblica"] .'</small><br>
-                        Numero video presenti: '. $row["numVid"] .'<br>
+            // Dati eventuale visualizzazione del video da parte dell'utente attuale
+            $sql="SELECT * FROM Video v, Visualizzazioni vis, Accounts a WHERE v.IdVideo=vis.IdVideo AND a.IdAccount=vis.IdAccount AND vis.IdAccount=? AND vis.IdVideo=?";
+            $query=$db->prepare($sql);
+            $dati=array($_SESSION["loginID"], $row["IdVideo"]);
+            $query->execute($dati);
+            $risVis=$query->fetchAll();
+            $tempoVis=-1;
+            $creator=$row["Username"];
+            foreach($risVis as $vis) {
+              $tempoVis=$vis["TempoVisualizzazione"];
+            }
+            echo '<div class="card card-video m-3" style="width: 16rem;">
+                    <div class="card-body card-video" onclick="cardOnClick(\''. $row["IdVideo"] .'\',\''. $row["Titolo"] .'\',\''. $row["SorgenteVideo"] .'\',\''. $tempoVis .'\',\''. $creator .'\')">
+                      <h5 class="card-title card-video">'. $row["Titolo"] .'</h5>
+                      <p class="card-text card-video">
+                        <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini">'. $creator .'</button></small><br>
+                        '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
+                        '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
                       </p>
                     </div>
                   </div>';

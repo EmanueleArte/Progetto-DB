@@ -38,14 +38,14 @@
           <!-- RICERCA -->
           <div class="row align-items-center justify-content-center">
             <div class="form-group col-7 mt-3">
-              <input type="text" id="cerca" class="form-control" name="cerca" placeholder="Inserisci nome canale o titolo video" required>
+              <input type="text" id="cerca" class="form-control" name="cerca" placeholder="Inserisci nome canale, titolo video o nome playlist" required>
             </div>
             <button id="bottoneCerca" class="btn btn-primary" value="">Cerca</button>
           </div>
         </form>
-        <!-- POST SCRITTI -->
+        <!-- CANALI -->
         <h2 class="titleText mt-3">Risultati ricerca canali</h2>
-        <div id="postScritti" class="row">
+        <div id="" class="row">
         <?php
           // Dati dei canali cercati
           $sql="SELECT * FROM Accounts WHERE Canale=1 AND Username LIKE ?";
@@ -95,6 +95,30 @@
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini">'. $creator .'</button></small><br>
                         '. $row["NumeroLike"] .' <i class="fa fa-thumbs-up mr-3"></i>
                         '. $row["NumeroVisualizzazioni"] .' <i class="fa fa-eye"></i>
+                      </p>
+                    </div>
+                  </div>';
+          }
+        ?>
+        </div>
+        <!-- PLAYLIST PUBBLICHE -->
+        <h2 class="titleText mt-3">Risultati ricerca playlist</h2>
+        <div class="row">
+        <?php
+          // Dati delle playlist cercati
+          $sql="SELECT *, (SELECT count(*) FROM Playlists p2 JOIN Composizioni_playlists c ON c.IdPlaylist=p2.IdPlaylist WHERE c.IdPlaylist=p.IdPlaylist) AS numVid 
+                FROM Playlists p, Accounts a WHERE a.IdAccount=p.IdAccount AND p.TipoPlaylist=3 AND p.Pubblica=1 AND p.NomePlaylist LIKE ?";
+          $query=$db->prepare($sql);
+          $dati=array("%".$_POST["cerca"]."%");
+          $query->execute($dati);
+          $ris=$query->fetchAll();
+          foreach($ris as $row) {
+            echo '<div class="card m-3 card-playlist" style="width: 16rem;" onclick="cardOnClickPlaylist(\''. $row["IdPlaylist"] .'\',\''. $row["NomePlaylist"] .'\')">
+                    <div class="card-body card-playlist">
+                      <h5 class="card-title card-playlist">'. $row["NomePlaylist"] .'</h5>
+                      <p class="card-text card-playlist">
+                        <small class="text-muted">Pubblica: '. $row["Pubblica"] .'</small><br>
+                        Numero video presenti: '. $row["numVid"] .'<br>
                       </p>
                     </div>
                   </div>';
