@@ -47,6 +47,9 @@
             <button id="bottoneCerca" class="btn btn-primary" value="">Cerca</button>
           </div>
         </form>
+        <div class="row mb-2">
+          <button id="etichette" class="btn btn-primary" onclick="location.href='etichette.php'">Etichette</button>
+        </div>
         <!-- SWITCH CONTENUTI -->
         <div class="custom-control custom-switch">
           <input type="checkbox" class="custom-control-input" id="contentSwitch" onclick="switchContent()" checked>
