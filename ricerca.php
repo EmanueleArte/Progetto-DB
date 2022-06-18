@@ -113,11 +113,13 @@
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
-            echo '<div class="card m-3 card-playlist" style="width: 16rem;" onclick="cardOnClickPlaylist(\''. $row["IdPlaylist"] .'\',\''. $row["NomePlaylist"] .'\')">
+            $pubbl="No";
+            if($row["Pubblica"]) $pubbl="Sì";
+            echo '<div class="card m-3 card-playlist" style="width: 16rem;" onclick="cardOnClickPlaylist(\''. $row["IdPlaylist"] .'\',\''. $row["NomePlaylist"] .'\',\''. $row["Username"] .'\')">
                     <div class="card-body card-playlist">
                       <h5 class="card-title card-playlist">'. $row["NomePlaylist"] .'</h5>
                       <p class="card-text card-playlist">
-                        <small class="text-muted">Pubblica: '. $row["Pubblica"] .'</small><br>
+                        <small class="text-muted">Di: '. $row["Username"] .'<br>Pubblica: '. $pubbl .'</small><br>
                         Numero video presenti: '. $row["numVid"] .'<br>
                       </p>
                     </div>

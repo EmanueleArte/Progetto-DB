@@ -47,8 +47,9 @@
             <button id="bottoneCerca" class="btn btn-primary" value="">Cerca</button>
           </div>
         </form>
+        <!-- RICERCA PER ETIOCHETTA -->
         <div class="row mb-2">
-          <button id="etichette" class="btn btn-primary" onclick="location.href='etichette.php'">Etichette</button>
+          <button id="etichette" class="btn btn-primary btn-sm ml-2" onclick="location.href='etichette.php'">Etichette</button>
         </div>
         <!-- SWITCH CONTENUTI -->
         <div class="custom-control custom-switch">

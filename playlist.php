@@ -29,6 +29,9 @@
       <h2 class="titleText mt-3"><?php echo $_GET["nome"]; ?></h2>
     </div>
     <div class="row justify-content-center">
+      <h3>di: <?php echo $_GET["utente"]; ?></h3>
+    </div>
+    <div class="row justify-content-center">
       <div id="homePosts" class="col-10">
         <h2 class="titleText mt-3">Video presenti</h2>
         <div class="row">

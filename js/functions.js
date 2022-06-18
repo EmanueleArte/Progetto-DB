@@ -133,8 +133,8 @@ function switchLikesPubbl() {
 
 
 // Click della card delle playlist
-function cardOnClickPlaylist(id, nomePlaylist) {
-    location.href = "playlist.php?id=" + id + "&nome=" + nomePlaylist;
+function cardOnClickPlaylist(id, nomePlaylist, utente) {
+    location.href = "playlist.php?id=" + id + "&nome=" + nomePlaylist + "&utente=" + utente;
 }
 
 // Click della card del video o del bottone del canale
