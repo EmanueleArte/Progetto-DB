@@ -55,9 +55,9 @@
 
           // Canale più simile a me per video piaciuti (se la playlist video piaciuti è pubblica)
           echo '<div>Account più simile a te per video piaciuti:';
-          $sql="SELECT Username, Canale, count(a1.IdAccount) AS num FROM Accounts a1, Playlists p1, Composizioni_playlists c1 WHERE a1.IdAccount=p1.IdAccount AND p1.IdPlaylist=c1.IdPlaylist AND p1.Pubblica=1 AND p1.TipoPlaylist=2 
+          $sql="SELECT p1.IdPlaylist, Username, Canale, count(*) AS num FROM Accounts a1, Playlists p1, Composizioni_playlists c1 WHERE a1.IdAccount=p1.IdAccount AND p1.IdPlaylist=c1.IdPlaylist AND p1.Pubblica=1 AND p1.TipoPlaylist=2 
                 AND a1.IdAccount!=? AND c1.IdVideo=ANY(SELECT c2.IdVideo FROM Playlists p2, Composizioni_playlists c2 WHERE p2.IdPlaylist=c2.IdPlaylist AND p2.TipoPlaylist=2 AND p2.IdAccount=?)
-                GROUP BY a1.IdAccount ORDER BY num DESC LIMIT 1";
+                GROUP BY a1.IdAccount, p1.idPlaylist ORDER BY num DESC LIMIT 1";
           $query=$db->prepare($sql);
           $dati=array($_SESSION["loginID"], $_SESSION["loginID"]);
           $query->execute($dati);
@@ -70,7 +70,7 @@
             if($row["Canale"]) {
               echo '<div class="mt-2 mb-2"><button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button></div>';
             } else {
-              echo '<div class="mt-2 mb-2"><button type="button" class="btn btn-outline-primary btn-sm">'. $row["Username"] .'</button></div>';
+              echo '<div class="mt-2 mb-2"><button type="button" class="btn btn-outline-primary btn-sm" onclick="location.href=\'playlist.php?id='. $row["IdPlaylist"] .'&utente='. $row["Username"] .'&nome=Video piaciuti\'">'. $row["Username"] .$row["num"].'</button></div>';
             }
           }
           echo '</div>';
