@@ -61,13 +61,15 @@
               echo '<button type="button" class="btn btn-outline-primary ml-4" onclick="location.href=\'iscrizione.php?canale='. $_GET["canale"] .'&iscrizione=1\'">Iscriviti</button>';
             }
           }
-          // Tasto iscrizione
+          // Tasto per vedere video piaciuti, se pubblici
           $sql="SELECT * FROM Accounts a JOIN Playlists p ON a.IdAccount=p.IdAccount WHERE a.IdAccount=? AND p.Pubblica=1 AND p.TipoPlaylist=2";
           $query=$db->prepare($sql);
           $dati=array($idCanale);
           $query->execute($dati);
           $ris=$query->fetch();
-          echo '<button type="button" class="btn btn-outline-primary btn-sm ml-4" onclick="location.href=\'playlist.php?id='. $ris["IdPlaylist"] .'&utente='. $_GET["canale"] .'&nome=Video piaciuti\'">Video piaciuti di '. $_GET["canale"] .'</button>';
+          if($ris["Pubblica"]) {
+            echo '<button type="button" class="btn btn-outline-primary btn-sm ml-4" onclick="location.href=\'playlist.php?id='. $ris["IdPlaylist"] .'&utente='. $_GET["canale"] .'&nome=Video piaciuti\'">Video piaciuti di '. $_GET["canale"] .'</button>';
+          }
         ?>
         </h4>
         <h2 class="titleText mt-3">Post scritti</h2>
