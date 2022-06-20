@@ -16,9 +16,9 @@
         $idLikes=$row["IdPlaylist"];
       }
       // Controlla se il video è già tra i piaciuti
-      $sql="SELECT * FROM Composizioni_playlists WHERE IdPlaylist=? AND IdVideo=?";
+      $sql="SELECT * FROM Composizioni_Playlists cp, Playlists p WHERE p.IdPlaylist=cp.IdPlaylist AND p.TipoPlaylist=2 AND p.IdAccount=? AND cp.IdVideo=?";
       $query=$db->prepare($sql);
-      $dati=array($idLikes, $_POST["idVideo"]);
+      $dati=array($_SESSION["loginID"], $_POST["idVideo"]);
       $query->execute($dati);
       $ris=$query->fetchAll();
       if (count($ris)>0) {
