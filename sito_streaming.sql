@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 20, 2022 alle 22:21
+-- Creato il: Giu 20, 2022 alle 22:37
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -99,6 +99,7 @@ INSERT INTO `categorizzazioni_video` (`IdEtichetta`, `IdVideo`) VALUES
 (1, 3),
 (1, 4),
 (1, 5),
+(1, 22),
 (2, 6),
 (4, 8),
 (6, 9),
@@ -208,7 +209,10 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (12, 7),
 (13, 7),
 (21, 7),
-(21, 8);
+(21, 8),
+(22, 7),
+(22, 8),
+(22, 17);
 
 -- --------------------------------------------------------
 
@@ -349,9 +353,9 @@ INSERT INTO `playlists` (`IdPlaylist`, `Pubblica`, `NomePlaylist`, `TipoPlaylist
 (10, 0, NULL, 2, 10),
 (11, 0, NULL, 1, 11),
 (12, 0, NULL, 2, 11),
-(15, 1, 'Tutto bello', 3, 6),
-(16, 0, 'Privatissima', 3, 6),
-(17, 1, 'Musica', 3, 9);
+(15, 1, 'Tutto bello', 0, 6),
+(16, 0, 'Privatissima', 0, 6),
+(17, 1, 'Musica', 0, 9);
 
 -- --------------------------------------------------------
 
@@ -404,7 +408,8 @@ INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, 
 (11, 'MySQL in 10 minutes', '2bW3HuaAUcY', '2022-06-20 21:40:46', 0, 1, 9),
 (12, 'Thor: Love and Thunder Trailer', '5mKjfZHDn_M', '2022-06-20 21:46:07', 0, 1, 9),
 (13, '4 ricette ', 'WEDndTCyGgU', '2022-06-20 22:01:09', 0, 1, 9),
-(21, 'Apex luck', 'YJoeKkNxdDM', '2022-06-20 22:17:51', 1, 1, 9);
+(21, 'Apex luck', 'YJoeKkNxdDM', '2022-06-20 22:17:51', 1, 1, 9),
+(22, 'Hall of fame - The Script ft. will.i.am', 'mk48xRzuNvA', '2022-06-20 22:26:00', 1, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -438,7 +443,8 @@ INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) V
 (9, 11, 13),
 (9, 12, 0),
 (9, 13, 0),
-(9, 21, 0),
+(9, 21, 21),
+(9, 22, 74),
 (10, 6, 40),
 (11, 6, 0);
 
@@ -602,7 +608,7 @@ ALTER TABLE `post_scritti`
 -- AUTO_INCREMENT per la tabella `video`
 --
 ALTER TABLE `video`
-  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
 
 --
 -- Limiti per le tabelle scaricate
