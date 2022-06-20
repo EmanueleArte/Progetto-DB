@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 20, 2022 alle 17:40
+-- Creato il: Giu 20, 2022 alle 22:21
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -44,7 +44,7 @@ INSERT INTO `accounts` (`IdAccount`, `Username`, `Mail`, `Password`, `Canale`, `
 (6, 'Molly', 'micia@sium.it', '$2y$10$WCuwQF.JFT8q5nDG4rLIE.l/AtFYINoTa7gQ5Qq0ThniLMpiCnrbC', 1, 1),
 (7, 'Lollo', 'boh@alaal.com', '$2y$10$d/E5CvjfXB20YzZhFm0zIeqsB8gHZgwJ/r7X17fyiqVo79Hq51up.', 1, 0),
 (8, 'provini', 'prova@provini.it', '$2y$10$tOjZhA8hACnFkz2MX2w0OOx0CDMRkLLqh7Bek387b97tUTk7NBo06', 0, NULL),
-(9, 'drake', 'drake@drake.com', '$2y$10$nQfbweQ4MWwmSgUZ/hAJzutFUpWokyL/WMlqLmAOtJaXvrUKHs5LS', 1, 3),
+(9, 'Roberto', 'drake@drake.com', '$2y$10$nQfbweQ4MWwmSgUZ/hAJzutFUpWokyL/WMlqLmAOtJaXvrUKHs5LS', 1, 3),
 (10, 'Cocco', 'cocchiddu@mi.cio', '$2y$10$5HZTo0lsP.BorVArloJpCuzxwFBbRTJoKHZ/ayHL2qh0mOWeBAUaq', 0, NULL),
 (11, 'Baghera', 'baghi@black.cat', '$2y$10$HO3WMMHkKUdIp9Z4ZdeUCeoY2ODKQD69BqVyt9EdvZkfolAuqxMyW', 0, NULL);
 
@@ -102,7 +102,13 @@ INSERT INTO `categorizzazioni_video` (`IdEtichetta`, `IdVideo`) VALUES
 (2, 6),
 (4, 8),
 (6, 9),
-(14, 9);
+(9, 21),
+(10, 12),
+(11, 11),
+(11, 13),
+(13, 13),
+(14, 9),
+(14, 11);
 
 -- --------------------------------------------------------
 
@@ -149,22 +155,10 @@ CREATE TABLE `commenti` (
 --
 
 INSERT INTO `commenti` (`IdCommento`, `IdAccount`, `TestoCommento`, `DataCommento`, `IdPost`, `IdVideo`) VALUES
-(1, 9, 'I gatti conquisteranno il mondo', '2022-06-14 18:07:09', NULL, 6),
-(2, 9, 'Questa ssssong sssspacca', '2022-06-14 18:18:21', NULL, 4),
-(3, 10, 'w i gatti, anche se a me piace solo dormire e mangiare', '2022-06-14 18:30:37', NULL, 6),
-(4, 11, 'FFFFFFFFFFFFFFFFFFFFFFFFFFf', '2022-06-15 00:22:10', NULL, 6),
-(5, 9, 'prova', '2022-06-15 12:51:35', NULL, 8),
-(6, 6, 'Miuuuummm', '2022-06-16 16:11:24', NULL, 6),
 (7, 6, 'Bella canzone', '2022-06-17 17:41:14', NULL, 3),
-(8, 6, 'prova', '2022-06-17 17:46:40', NULL, 3),
-(9, 6, 'pro', '2022-06-17 17:47:14', NULL, 3),
-(10, 6, 's', '2022-06-17 17:48:30', NULL, 3),
 (11, 6, 'ciaoo', '2022-06-17 17:49:59', NULL, 3),
-(12, 6, 'alora', '2022-06-17 17:50:30', NULL, 3),
-(19, 9, 'sta canzone va a fuoco', '2022-06-20 16:20:15', NULL, 5),
-(21, 9, 'Ora vanno anche i commenti vero?', '2022-06-20 16:21:32', 5, NULL),
-(22, 9, 'Vannoooooooooooooooooooooooooo', '2022-06-20 16:21:37', 5, NULL),
-(23, 9, 'Siuuuuuuuuuuuuuuuuuuuuuuuuuum', '2022-06-20 16:21:42', 5, NULL);
+(24, 9, 'Questa canzone spacca :)', '2022-06-20 21:30:40', NULL, 4),
+(25, 9, 'o.o', '2022-06-20 22:19:19', NULL, 21);
 
 -- --------------------------------------------------------
 
@@ -187,15 +181,18 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (3, 4),
 (3, 7),
 (3, 15),
+(3, 17),
 (4, 1),
 (4, 2),
 (4, 3),
 (4, 4),
 (4, 7),
 (4, 8),
+(4, 17),
 (5, 1),
 (5, 7),
 (5, 8),
+(5, 17),
 (6, 1),
 (6, 7),
 (6, 8),
@@ -206,7 +203,12 @@ INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (6, 15),
 (6, 16),
 (8, 7),
-(9, 7);
+(9, 7),
+(11, 7),
+(12, 7),
+(13, 7),
+(21, 7),
+(21, 8);
 
 -- --------------------------------------------------------
 
@@ -278,7 +280,7 @@ CREATE TABLE `iscrizioni` (
 --
 
 INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
-(6, 9, '2022-06-20 17:31:11'),
+(6, 9, '2022-06-20 17:42:27'),
 (9, 6, '2022-06-13 19:18:15'),
 (9, 10, '2022-06-14 18:30:02'),
 (9, 11, '2022-06-15 00:21:41');
@@ -304,32 +306,17 @@ CREATE TABLE `messaggi` (
 
 INSERT INTO `messaggi` (`IdMessaggio`, `TestoMessaggio`, `DataInvio`, `IdChat`, `IdGruppo`, `IdAccount`) VALUES
 (1, 'Ciao Molly', '2022-06-09 00:00:00', 2, NULL, 9),
-(2, 'prova', '2022-06-14 12:44:05', 2, NULL, 9),
-(3, 'messaggio', '2022-06-14 13:09:54', 2, NULL, 9),
-(4, 'heihei', '2022-06-14 13:51:04', 2, NULL, 9),
-(5, 'cosa succede se scrivo un messaggio moooooooooooooooolto lungo?', '2022-06-14 13:51:24', 2, NULL, 9),
-(6, 'e se scrivo un messaggio ancora più lungo, tipo davvero tanto che magari non ci sta tutto in una riga e tocca spezzarlo', '2022-06-14 14:06:42', 2, NULL, 9),
 (7, 'questo messaggio è in un gruppo', '2022-06-14 16:10:58', NULL, 1, 9),
-(8, 'Ciao umano', '2022-06-14 16:21:22', 3, NULL, 10),
-(9, 'Ciao cocchiddu', '2022-06-14 16:21:52', 3, NULL, 9),
-(10, 'Dammi del cibo', '2022-06-14 16:22:20', 3, NULL, 10),
-(11, ':/', '2022-06-14 16:23:06', 3, NULL, 9),
 (12, 'Ehi anche io sono nel gruppo!', '2022-06-14 16:24:34', NULL, 1, 10),
-(13, 'Ciauuuu', '2022-06-14 16:25:41', NULL, 1, 9),
-(14, 'Comunque forse potremmo pensare di aumentare le dimensioni massime di un messaggio, mi sembra avessimo messo 200 caratteri ma non sono poi così tanti, soprattutto se scrivi un messaggio così', '2022-06-14 16:27:43', NULL, 1, 9),
-(16, 'Prova', '2022-06-14 20:23:11', 5, NULL, 10),
 (17, 'Ciao', '2022-06-15 00:09:09', 8, NULL, 10),
-(18, 'Mau', '2022-06-15 00:22:32', 11, NULL, 11),
-(19, 'Ciao mici', '2022-06-15 12:48:55', NULL, 13, 9),
-(20, 'prova', '2022-06-15 12:50:07', NULL, 13, 9),
-(21, 'funziona', '2022-06-15 12:50:12', NULL, 13, 9),
-(22, 'yeeee', '2022-06-15 12:50:16', NULL, 13, 9),
-(23, 'Baghii', '2022-06-15 12:50:32', 11, NULL, 9),
-(24, 'Yupppy', '2022-06-16 16:06:47', NULL, 13, 6),
 (25, 'Grazie Paolo', '2022-06-16 16:07:58', NULL, 14, 6),
 (26, 'Ciauuuu', '2022-06-16 16:09:32', 2, NULL, 6),
 (27, 'Prova', '2022-06-16 16:10:36', 12, NULL, 6),
-(28, 'Bene', '2022-06-17 17:19:15', 12, NULL, 7);
+(28, 'Bene', '2022-06-17 17:19:15', 12, NULL, 7),
+(29, 'Ciao Baghera :)', '2022-06-20 21:48:26', 11, NULL, 9),
+(30, 'Ciao come va?', '2022-06-20 21:48:52', 3, NULL, 9),
+(31, 'Questo è un gruppo di prova', '2022-06-20 21:49:14', NULL, 9, 9),
+(32, 'Un altro gruppo', '2022-06-20 21:50:36', NULL, 13, 9);
 
 -- --------------------------------------------------------
 
@@ -363,7 +350,8 @@ INSERT INTO `playlists` (`IdPlaylist`, `Pubblica`, `NomePlaylist`, `TipoPlaylist
 (11, 0, NULL, 1, 11),
 (12, 0, NULL, 2, 11),
 (15, 1, 'Tutto bello', 3, 6),
-(16, 0, 'Privatissima', 3, 6);
+(16, 0, 'Privatissima', 3, 6),
+(17, 1, 'Musica', 3, 9);
 
 -- --------------------------------------------------------
 
@@ -384,13 +372,7 @@ CREATE TABLE `post_scritti` (
 --
 
 INSERT INTO `post_scritti` (`IdPost`, `Titolo`, `DataPubblicazione`, `TestoPost`, `IdAccount`) VALUES
-(2, 'Prova1', '2022-06-09 12:08:31', 'Dovrebbe andare tutto direi.', 6),
-(3, 'Questo va!', '2022-06-09 12:09:44', 'Ne sono sicuro', 6),
-(4, 'Prova1', '2022-06-09 12:32:10', 'ciao', 6),
-(5, 'Tutto bello', '2022-06-11 11:43:56', 'Il sito vaaaaaa', 6),
-(6, 'ewfa', '2022-06-11 11:54:31', 'dfkjndskjdsnkdsk kasc.', 6),
-(7, 'Non sono Molly', '2022-06-13 10:38:41', 'siam', 7),
-(8, 'Sofferenza', '2022-06-14 18:27:37', 'Non ho voglia di fare la creazione dei gruppi\r\nCiaooooooo <3', 9);
+(9, 'Questo è un post scritto', '2022-06-20 21:32:12', 'E qui posso scrivere qualunque cosa', 9);
 
 -- --------------------------------------------------------
 
@@ -418,7 +400,11 @@ INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, 
 (5, ' Forget me too - Machine Gun Kelly ft. Halsey', '0tn6nWYNK3Q', '2022-06-13 10:35:37', 1, 2, 6),
 (6, 'Miao', 'z3U0udLH974', '2022-06-13 15:26:37', 3, 4, 9),
 (8, 'Ferrari SF-90', 'lJcNhqdFo9M', '2022-06-14 16:24:30', 0, 2, 6),
-(9, 'Dentro la sede di Apple', 'UoYPP4fjN2c', '2022-06-14 17:07:45', 0, 2, 6);
+(9, 'Dentro la sede di Apple', 'UoYPP4fjN2c', '2022-06-14 17:07:45', 0, 2, 6),
+(11, 'MySQL in 10 minutes', '2bW3HuaAUcY', '2022-06-20 21:40:46', 0, 1, 9),
+(12, 'Thor: Love and Thunder Trailer', '5mKjfZHDn_M', '2022-06-20 21:46:07', 0, 1, 9),
+(13, '4 ricette ', 'WEDndTCyGgU', '2022-06-20 22:01:09', 0, 1, 9),
+(21, 'Apex luck', 'YJoeKkNxdDM', '2022-06-20 22:17:51', 1, 1, 9);
 
 -- --------------------------------------------------------
 
@@ -443,12 +429,16 @@ INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) V
 (6, 6, 6),
 (7, 3, 80),
 (7, 4, 0),
-(9, 3, 9),
-(9, 4, 60),
+(9, 3, 11),
+(9, 4, 28),
 (9, 5, 20),
 (9, 6, 10),
 (9, 8, 17),
 (9, 9, 7),
+(9, 11, 13),
+(9, 12, 0),
+(9, 13, 0),
+(9, 21, 0),
 (10, 6, 40),
 (11, 6, 0);
 
@@ -576,7 +566,7 @@ ALTER TABLE `chats`
 -- AUTO_INCREMENT per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- AUTO_INCREMENT per la tabella `etichette`
@@ -594,25 +584,25 @@ ALTER TABLE `gruppi`
 -- AUTO_INCREMENT per la tabella `messaggi`
 --
 ALTER TABLE `messaggi`
-  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- AUTO_INCREMENT per la tabella `playlists`
 --
 ALTER TABLE `playlists`
-  MODIFY `IdPlaylist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `IdPlaylist` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT per la tabella `post_scritti`
 --
 ALTER TABLE `post_scritti`
-  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT per la tabella `video`
 --
 ALTER TABLE `video`
-  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `IdVideo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- Limiti per le tabelle scaricate

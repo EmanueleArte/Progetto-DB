@@ -13,16 +13,17 @@
         if($_POST["etichetta"]!="-1") {
           $sql="SELECT * FROM Video ORDER BY IdVideo DESC LIMIT 1";
           $query=$db->prepare($sql);
-          $dati=array($_POST["titolo"], $_POST["link"], $_SESSION["loginID"]);
-          $query->execute($dati);
+          $query->execute();
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             // Inserimento collegamento con etichetta
             foreach($_POST["etichetta"] as $etichetta) {
-              $sql="INSERT INTO Categorizzazioni_video(IdVideo, IdEtichetta) VALUES (?,?)";
-              $query=$db->prepare($sql);
-              $dati=array($row["IdVideo"], $etichetta);
-              $query->execute($dati);
+              if($etichetta != null && $etichetta != -1){
+                $sql="INSERT INTO Categorizzazioni_video(IdVideo, IdEtichetta) VALUES (?,?)";
+                $query=$db->prepare($sql);
+                $dati=array($row["IdVideo"], $etichetta);
+                $query->execute($dati);
+              }
             }
           }
         }
