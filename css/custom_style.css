@@ -28,7 +28,7 @@ div, h2, p {
   cursor: default;
 }
 
-.card-video,.card-playlist {
+.card-video,.card-playlist,.card-post {
   cursor: pointer;
 }
 

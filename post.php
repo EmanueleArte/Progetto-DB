@@ -20,14 +20,14 @@
 
   <div class="container-fluid pt-3">
     <!-- BOTTONI STANDARD -->
-    <div class="row justify-content-center">
+    <div class="row justify-content-center mb-1">
       <button type="button" class="btn btn-outline-dark" onclick="location.href='home.php'">Home</button>
     </div>
     <div class="row justify-content-center pt-4 w-100">
       <!--div class="row justify-content-center pb-3">
         <h2 class="titleText"></h2>
       </div-->
-      <div class="row justify-content-center pb-3 w-75">
+      <div class="row justify-content-center pb-4 w-75">
         <div class="card w-100">
           <div class="card-body w-100">
             <?php
