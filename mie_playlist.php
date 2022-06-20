@@ -32,7 +32,7 @@
         <?php
           // Dati delle playlist
           $sql="SELECT *, (SELECT count(*) FROM Playlists p2 JOIN Composizioni_playlists c ON c.IdPlaylist=p2.IdPlaylist WHERE c.IdPlaylist=p.IdPlaylist) AS numVid 
-                FROM Playlists p, Accounts a WHERE a.IdAccount=p.IdAccount AND a.IdAccount=? AND p.TipoPlaylist=3";
+                FROM Playlists p, Accounts a WHERE a.IdAccount=p.IdAccount AND a.IdAccount=? AND p.TipoPlaylist=0";
           $query=$db->prepare($sql);
           $dati=array($_SESSION["loginID"]);
           $query->execute($dati);

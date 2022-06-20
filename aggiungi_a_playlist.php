@@ -39,7 +39,7 @@
               <option value="-1" selected>Scegli...</option>
               <?php
                 // Ottengo playlist dell'utente
-                $sql="SELECT * FROM Playlists WHERE IdAccount=? AND TipoPlaylist=3";
+                $sql="SELECT * FROM Playlists WHERE IdAccount=? AND TipoPlaylist=0";
                 $query=$db->prepare($sql);
                 $dati=array($_SESSION["loginID"]);
                 $query->execute($dati);

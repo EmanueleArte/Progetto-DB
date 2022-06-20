@@ -12,7 +12,7 @@
         // inserimento post scritto nel DB
         $sql="INSERT INTO Playlists(Pubblica, NomePlaylist, TipoPlaylist, IdAccount) VALUES (?,?,?,?)";
         $query=$db->prepare($sql);
-        $dati=array($pubblica, $_POST["titolo"], 3, $_SESSION["loginID"]);
+        $dati=array($pubblica, $_POST["titolo"], 0, $_SESSION["loginID"]);
         $ris=$query->execute($dati);
         header("location: home.php");
     } else {

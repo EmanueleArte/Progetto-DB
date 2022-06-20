@@ -107,7 +107,7 @@
         <?php
           // Dati delle playlist cercati
           $sql="SELECT *, (SELECT count(*) FROM Playlists p2 JOIN Composizioni_playlists c ON c.IdPlaylist=p2.IdPlaylist WHERE c.IdPlaylist=p.IdPlaylist) AS numVid 
-                FROM Playlists p, Accounts a WHERE a.IdAccount=p.IdAccount AND p.TipoPlaylist=3 AND p.Pubblica=1 AND p.NomePlaylist LIKE ?";
+                FROM Playlists p, Accounts a WHERE a.IdAccount=p.IdAccount AND p.TipoPlaylist=0 AND p.Pubblica=1 AND p.NomePlaylist LIKE ?";
           $query=$db->prepare($sql);
           $dati=array("%".$_POST["cerca"]."%");
           $query->execute($dati);
