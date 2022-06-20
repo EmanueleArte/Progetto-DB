@@ -146,6 +146,15 @@ function cardOnClick(id, titolo, video, time, creator) {
   }
 }
 
+// Click della card del post o del bottone del canale
+function cardOnClickPost(id, creator) {
+  if (event.target.tagName.toLowerCase() == "button") {
+    location.href = "canale.php?canale=" + creator;
+  } else {
+    location.href = "post.php?postID=" + id;
+  }
+}
+
 // Mostra e nasconde i contenuti della home
 function switchContent() {
   const contentSwitch=document.getElementById("contentSwitch");
