@@ -90,7 +90,6 @@
           ?>
         </div>
         <div>
-        </div>
           <div class="form-group w-100">
             <input type="text" id="commentText" class="form-control" onkeydown="sendComment()" placeholder="Lascia un commento" required>
           </div>

@@ -98,8 +98,8 @@ function addLikeVideo(idLike) {
 
 // Aggiunge una scelta etichetta aggiuntiva al form (massimo 3)
 var nEtichette=1;
-const groupBase = document.getElementById("etichette").innerHTML;
 function additionalTag() {
+  const groupBase = document.getElementById("etichette").innerHTML;
   var group=document.getElementById("etichette");
   var selects=document.getElementsByClassName("custom-select");
   var cont=0;
@@ -181,6 +181,21 @@ function sendComment() {
         urlP.set("time", getCurrTime());
         location.href="video.php?"+urlP.toString().replaceAll("+", " ");
         //location.reload();
+      });
+  }
+}
+
+function sendPostComment() {
+  if (event.key === 'Enter') {
+    const postID = urlParams.get('postID');
+    var comment = document.getElementById('commentText').value;
+    document.getElementById('commentText').value = '';
+    var formData = new FormData();
+    formData.append("commentText", comment);
+    formData.append("postID", postID);
+    postData('sendComment.php', formData)
+      .then((res) => {
+        location.reload();
       });
   }
 }

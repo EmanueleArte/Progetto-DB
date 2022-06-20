@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Creato il: Giu 17, 2022 alle 16:12
--- Versione del server: 5.7.34
--- Versione PHP: 7.4.21
+-- Host: 127.0.0.1
+-- Creato il: Giu 20, 2022 alle 16:24
+-- Versione del server: 10.4.24-MariaDB
+-- Versione PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,20 +65,20 @@ CREATE TABLE `appartenenze_gruppi` (
 
 INSERT INTO `appartenenze_gruppi` (`IdGruppo`, `IdAccount`) VALUES
 (1, 6),
-(13, 6),
-(14, 6),
-(15, 6),
-(14, 7),
-(15, 7),
 (1, 9),
-(9, 9),
-(13, 9),
 (1, 10),
+(9, 9),
 (9, 10),
-(13, 10),
-(14, 10),
 (9, 11),
-(13, 11);
+(13, 6),
+(13, 9),
+(13, 10),
+(13, 11),
+(14, 6),
+(14, 7),
+(14, 10),
+(15, 6),
+(15, 7);
 
 -- --------------------------------------------------------
 
@@ -139,7 +139,7 @@ CREATE TABLE `commenti` (
   `IdCommento` int(11) NOT NULL,
   `IdAccount` int(11) NOT NULL,
   `TestoCommento` varchar(200) NOT NULL,
-  `DataCommento` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DataCommento` datetime NOT NULL DEFAULT current_timestamp(),
   `IdPost` int(11) DEFAULT NULL,
   `IdVideo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -160,7 +160,11 @@ INSERT INTO `commenti` (`IdCommento`, `IdAccount`, `TestoCommento`, `DataComment
 (9, 6, 'pro', '2022-06-17 17:47:14', NULL, 3),
 (10, 6, 's', '2022-06-17 17:48:30', NULL, 3),
 (11, 6, 'ciaoo', '2022-06-17 17:49:59', NULL, 3),
-(12, 6, 'alora', '2022-06-17 17:50:30', NULL, 3);
+(12, 6, 'alora', '2022-06-17 17:50:30', NULL, 3),
+(19, 9, 'sta canzone va a fuoco', '2022-06-20 16:20:15', NULL, 5),
+(21, 9, 'Ora vanno anche i commenti vero?', '2022-06-20 16:21:32', 5, NULL),
+(22, 9, 'Vannoooooooooooooooooooooooooo', '2022-06-20 16:21:37', 5, NULL),
+(23, 9, 'Siuuuuuuuuuuuuuuuuuuuuuuuuuum', '2022-06-20 16:21:42', 5, NULL);
 
 -- --------------------------------------------------------
 
@@ -179,30 +183,30 @@ CREATE TABLE `composizioni_playlists` (
 
 INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
-(4, 2),
 (3, 3),
-(4, 3),
 (3, 4),
-(4, 4),
 (3, 7),
+(3, 15),
+(4, 1),
+(4, 2),
+(4, 3),
+(4, 4),
 (4, 7),
-(5, 7),
-(6, 7),
-(8, 7),
-(9, 7),
 (4, 8),
+(5, 1),
+(5, 7),
 (5, 8),
+(6, 1),
+(6, 7),
 (6, 8),
 (6, 9),
 (6, 10),
 (6, 11),
 (6, 12),
-(3, 15),
 (6, 15),
-(6, 16);
+(6, 16),
+(8, 7),
+(9, 7);
 
 -- --------------------------------------------------------
 
@@ -266,7 +270,7 @@ INSERT INTO `gruppi` (`IdGruppo`, `NomeGruppo`) VALUES
 CREATE TABLE `iscrizioni` (
   `IdCanale` int(11) NOT NULL,
   `IdIscritto` int(11) NOT NULL,
-  `DataIscrizione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `DataIscrizione` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -288,7 +292,7 @@ INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
 CREATE TABLE `messaggi` (
   `IdMessaggio` int(11) NOT NULL,
   `TestoMessaggio` varchar(200) NOT NULL,
-  `DataInvio` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DataInvio` datetime NOT NULL DEFAULT current_timestamp(),
   `IdChat` int(11) DEFAULT NULL,
   `IdGruppo` int(11) DEFAULT NULL,
   `IdAccount` int(11) NOT NULL
@@ -370,7 +374,7 @@ INSERT INTO `playlists` (`IdPlaylist`, `Pubblica`, `NomePlaylist`, `TipoPlaylist
 CREATE TABLE `post_scritti` (
   `IdPost` int(11) NOT NULL,
   `Titolo` varchar(40) NOT NULL,
-  `DataPubblicazione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DataPubblicazione` datetime NOT NULL DEFAULT current_timestamp(),
   `TestoPost` varchar(400) NOT NULL,
   `IdAccount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -398,9 +402,9 @@ CREATE TABLE `video` (
   `IdVideo` int(11) NOT NULL,
   `Titolo` varchar(100) NOT NULL,
   `SorgenteVideo` varchar(300) NOT NULL,
-  `DataPubblicazione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `NumeroLike` int(11) NOT NULL DEFAULT '0',
-  `NumeroVisualizzazioni` int(11) NOT NULL DEFAULT '0',
+  `DataPubblicazione` datetime NOT NULL DEFAULT current_timestamp(),
+  `NumeroLike` int(11) NOT NULL DEFAULT 0,
+  `NumeroVisualizzazioni` int(11) NOT NULL DEFAULT 0,
   `IdAccount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -439,12 +443,12 @@ INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) V
 (6, 6, 6),
 (7, 3, 80),
 (7, 4, 0),
-(9, 3, 6),
-(9, 4, 44),
-(9, 5, 3),
+(9, 3, 9),
+(9, 4, 60),
+(9, 5, 20),
 (9, 6, 10),
 (9, 8, 17),
-(9, 9, 2),
+(9, 9, 7),
 (10, 6, 40),
 (11, 6, 0);
 
@@ -572,7 +576,7 @@ ALTER TABLE `chats`
 -- AUTO_INCREMENT per la tabella `commenti`
 --
 ALTER TABLE `commenti`
-  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `IdCommento` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT per la tabella `etichette`
