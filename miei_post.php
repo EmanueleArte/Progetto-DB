@@ -42,10 +42,10 @@
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
-            echo '<div class="card m-3" style="width: 16rem;">
-                    <div class="card-body">
-                      <h5 class="card-title">'. $row["Titolo"] .'</h5>
-                      <p class="card-text">
+            echo '<div class="card m-3 card-post" style="width: 16rem;">
+                    <div class="card-body card-post" onclick="location.href=\'post.php?postID='.$row["IdPost"].'\'">
+                      <h5 class="card-title card-post">'. $row["Titolo"] .'</h5>
+                      <p class="card-text card-post">
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da: '. $row["Username"] .'</small><br>
                         '. $row["TestoPost"] .'<br>
                       </p>
