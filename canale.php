@@ -67,8 +67,8 @@
           $dati=array($idCanale);
           $query->execute($dati);
           $ris=$query->fetchAll();
-          if($ris[0]["Pubblica"]) {
-            echo '<button type="button" class="btn btn-outline-primary btn-sm ml-4" onclick="location.href=\'playlist.php?id='. $ris["IdPlaylist"] .'&utente='. $_GET["canale"] .'&nome=Video piaciuti\'">Video piaciuti di '. $_GET["canale"] .'</button>';
+          if(count($ris)>0) {
+            echo '<button type="button" class="btn btn-outline-primary btn-sm ml-4" onclick="location.href=\'playlist.php?id='. $ris[0]["IdPlaylist"] .'&utente='. $_GET["canale"] .'&nome=Video piaciuti\'">Video piaciuti di '. $_GET["canale"] .'</button>';
           }
         ?>
         </h4>
