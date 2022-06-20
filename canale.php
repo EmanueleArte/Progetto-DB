@@ -76,7 +76,7 @@
         <div class="row">
           <?php
           // Dati dei post
-          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.Username=? ORDER BY DataPubblicazione DESC";
+          $sql="SELECT * FROM Post_Scritti s, Accounts a WHERE a.IdAccount=s.IdAccount AND a.Username=? ORDER BY s.DataPubblicazione DESC";
           $query=$db->prepare($sql);
           $dati=array($_GET["canale"]);
           $query->execute($dati);
@@ -98,14 +98,14 @@
         <div id="postVideo" class="row">
           <?php
           // Dati del video
-          $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE a.Username=?";
+          $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount WHERE a.Username=? ORDER BY v.DataPubblicazione DESC";
           $query=$db->prepare($sql);
           $dati=array($_GET["canale"]);
           $query->execute($dati);
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             // Dati eventuale visualizzazione del video da parte dell'utente attuale
-            $sql="SELECT * FROM Video v, Visualizzazioni vis, Accounts a WHERE v.IdVideo=vis.IdVideo AND a.IdAccount=vis.IdAccount AND vis.IdAccount=? AND vis.IdVideo=?";
+            $sql="SELECT * FROM Video v, Visualizzazioni vis, Accounts a WHERE v.IdVideo=vis.IdVideo AND a.IdAccount=vis.IdAccount AND vis.IdAccount=? AND v.IdVideo=?";
             $query=$db->prepare($sql);
             $dati=array($_SESSION["loginID"], $row["IdVideo"]);
             $query->execute($dati);

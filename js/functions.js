@@ -98,8 +98,8 @@ function addLikeVideo(idLike) {
 
 // Aggiunge una scelta etichetta aggiuntiva al form (massimo 3)
 var nEtichette=1;
+const groupBase = document.getElementById("etichette").innerHTML;
 function additionalTag() {
-  const groupBase = document.getElementById("etichette").innerHTML;
   var group=document.getElementById("etichette");
   var selects=document.getElementsByClassName("custom-select");
   var cont=0;

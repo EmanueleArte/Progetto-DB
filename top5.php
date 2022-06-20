@@ -65,7 +65,7 @@
         <div class="row">
         <?php
           // Dati dei video con più likes
-          $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount ORDER BY NumeroLike DESC LIMIT 5";
+          $sql="SELECT * FROM Video v JOIN Accounts a ON v.IdAccount=a.IdAccount ORDER BY v.NumeroLike DESC LIMIT 5";
           $query=$db->prepare($sql);
           $query->execute();
           $ris=$query->fetchAll();

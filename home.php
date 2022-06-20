@@ -138,7 +138,7 @@
         <div id="postVideoSeguiti" class="row">
         <?php
           // Dati dei video dei canali seguiti
-          $sql="SELECT * FROM Video v, Accounts a, Iscrizioni i WHERE v.IdAccount=a.IdAccount AND a.IdAccount=i.IdCanale AND i.IdIscritto=? ORDER BY DataPubblicazione DESC LIMIT 12";
+          $sql="SELECT * FROM Video v, Accounts a, Iscrizioni i WHERE v.IdAccount=a.IdAccount AND a.IdAccount=i.IdCanale AND i.IdIscritto=? ORDER BY v.DataPubblicazione DESC LIMIT 12";
           $query=$db->prepare($sql);
           $dati=array($_SESSION["loginID"]);
           $query->execute($dati);
