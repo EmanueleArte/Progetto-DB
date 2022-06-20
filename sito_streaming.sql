@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Giu 20, 2022 alle 16:24
+-- Creato il: Giu 20, 2022 alle 17:40
 -- Versione del server: 10.4.24-MariaDB
 -- Versione PHP: 8.1.6
 
@@ -41,10 +41,10 @@ CREATE TABLE `accounts` (
 --
 
 INSERT INTO `accounts` (`IdAccount`, `Username`, `Mail`, `Password`, `Canale`, `NumeroIscritti`) VALUES
-(6, 'Molly', 'micia@sium.it', '$2y$10$WCuwQF.JFT8q5nDG4rLIE.l/AtFYINoTa7gQ5Qq0ThniLMpiCnrbC', 1, 0),
+(6, 'Molly', 'micia@sium.it', '$2y$10$WCuwQF.JFT8q5nDG4rLIE.l/AtFYINoTa7gQ5Qq0ThniLMpiCnrbC', 1, 1),
 (7, 'Lollo', 'boh@alaal.com', '$2y$10$d/E5CvjfXB20YzZhFm0zIeqsB8gHZgwJ/r7X17fyiqVo79Hq51up.', 1, 0),
 (8, 'provini', 'prova@provini.it', '$2y$10$tOjZhA8hACnFkz2MX2w0OOx0CDMRkLLqh7Bek387b97tUTk7NBo06', 0, NULL),
-(9, 'drake', 'drake@drake.com', '$2y$10$nQfbweQ4MWwmSgUZ/hAJzutFUpWokyL/WMlqLmAOtJaXvrUKHs5LS', 1, 2),
+(9, 'drake', 'drake@drake.com', '$2y$10$nQfbweQ4MWwmSgUZ/hAJzutFUpWokyL/WMlqLmAOtJaXvrUKHs5LS', 1, 3),
 (10, 'Cocco', 'cocchiddu@mi.cio', '$2y$10$5HZTo0lsP.BorVArloJpCuzxwFBbRTJoKHZ/ayHL2qh0mOWeBAUaq', 0, NULL),
 (11, 'Baghera', 'baghi@black.cat', '$2y$10$HO3WMMHkKUdIp9Z4ZdeUCeoY2ODKQD69BqVyt9EdvZkfolAuqxMyW', 0, NULL);
 
@@ -278,7 +278,7 @@ CREATE TABLE `iscrizioni` (
 --
 
 INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
-(6, 9, '2022-06-13 21:47:27'),
+(6, 9, '2022-06-20 17:31:11'),
 (9, 6, '2022-06-13 19:18:15'),
 (9, 10, '2022-06-14 18:30:02'),
 (9, 11, '2022-06-15 00:21:41');

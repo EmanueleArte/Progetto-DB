@@ -66,8 +66,8 @@
           $query=$db->prepare($sql);
           $dati=array($idCanale);
           $query->execute($dati);
-          $ris=$query->fetchAll();
-          if($ris[0]["Pubblica"]) {
+          $ris=$query->fetch();
+          if($ris["Pubblica"]) {
             echo '<button type="button" class="btn btn-outline-primary btn-sm ml-4" onclick="location.href=\'playlist.php?id='. $ris["IdPlaylist"] .'&utente='. $_GET["canale"] .'&nome=Video piaciuti\'">Video piaciuti di '. $_GET["canale"] .'</button>';
           }
         ?>
