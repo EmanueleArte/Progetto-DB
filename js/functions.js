@@ -137,6 +137,15 @@ function cardOnClickPlaylist(id, nomePlaylist, utente) {
     location.href = "playlist.php?id=" + id + "&nome=" + nomePlaylist + "&utente=" + utente;
 }
 
+// Click della card del post o del bottone del canale
+function cardOnClickPost(id, creator) {
+  if (event.target.tagName.toLowerCase() == "button") {
+    location.href = "canale.php?canale=" + creator;
+  } else {
+    location.href = "post.php?postID=" + id;
+  }
+}
+
 // Click della card del video o del bottone del canale
 function cardOnClick(id, titolo, video, time, creator) {
   if (event.target.tagName.toLowerCase() == "button") {

@@ -67,7 +67,7 @@
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             echo '<div class="card m-3 card-post" style="width: 16rem;">
-                    <div class="card-body card-post" onclick="location.href=\'post.php?postID='.$row["IdPost"].'\'">
+                    <div class="card-body card-post" onclick="cardOnClickPost(\''.$row["IdPost"].'\',\''. $row["Username"] .'\')">
                       <h5 class="card-title card-post">'. $row["Titolo"] .'</h5>
                       <p class="card-text card-post">
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button></small><br>
@@ -89,7 +89,7 @@
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             echo '<div class="card m-3 card-post" style="width: 16rem;">
-                    <div class="card-body card-post" onclick="location.href=\'post.php?postID='.$row["IdPost"].'\'">
+                    <div class="card-body card-post" onclick="cardOnClickPost(\''.$row["IdPost"].'\',\''. $row["Username"] .'\')">
                       <h5 class="card-title card-post">'. $row["Titolo"] .'</h5>
                       <p class="card-text card-post">
                         <small class="text-muted">Pubblicato il: '. $row["DataPubblicazione"] .'<br>da:<button type="button" class="btn btn-outline-primary btn-sm mini" onclick="location.href=\'canale.php?canale='. $row["Username"] .'\'">'. $row["Username"] .'</button></small><br>
