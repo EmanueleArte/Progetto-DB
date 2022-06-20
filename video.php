@@ -93,6 +93,7 @@
           <div class="form-group w-100">
             <input type="text" id="commentText" class="form-control" onkeydown="sendComment()" placeholder="Lascia un commento" required>
           </div>
+          <!-- COMMENTI -->
           <div id='commentsField'>
             <?php
               $sql="SELECT * FROM Commenti c, Accounts a WHERE a.IdAccount=c.IdAccount AND c.IdVideo=".$_GET["id"];

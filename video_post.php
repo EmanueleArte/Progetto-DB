@@ -13,8 +13,8 @@
         if($_POST["etichetta"]!="-1") {
           $sql="SELECT * FROM Video ORDER BY IdVideo DESC LIMIT 1";
           $query=$db->prepare($sql);
-          $dati=array($_POST["titolo"], $_POST["link"], $_SESSION["loginID"]);
-          $query->execute($dati);
+          $dati=array();
+          $query->execute();
           $ris=$query->fetchAll();
           foreach($ris as $row) {
             // Inserimento collegamento con etichetta
