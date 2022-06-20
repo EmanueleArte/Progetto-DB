@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <!-- icona + titolo -->
   <link rel="icon" href="">
-  <title>Sito streaming</title>
+  <title>Sito streaming - Canale</title>
   <!-- fogli di stile esterni + bootstrap -->
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/custom_style.css">
@@ -66,8 +66,8 @@
           $query=$db->prepare($sql);
           $dati=array($idCanale);
           $query->execute($dati);
-          $ris=$query->fetch();
-          if($ris["Pubblica"]) {
+          $ris=$query->fetchAll();
+          if($ris[0]["Pubblica"]) {
             echo '<button type="button" class="btn btn-outline-primary btn-sm ml-4" onclick="location.href=\'playlist.php?id='. $ris["IdPlaylist"] .'&utente='. $_GET["canale"] .'&nome=Video piaciuti\'">Video piaciuti di '. $_GET["canale"] .'</button>';
           }
         ?>
