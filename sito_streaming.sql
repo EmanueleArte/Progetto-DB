@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: localhost:8889
--- Creato il: Giu 21, 2022 alle 09:52
--- Versione del server: 5.7.34
--- Versione PHP: 7.4.21
+-- Host: 127.0.0.1
+-- Creato il: Giu 21, 2022 alle 12:12
+-- Versione del server: 10.4.24-MariaDB
+-- Versione PHP: 8.1.6
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -65,18 +65,18 @@ CREATE TABLE `appartenenze_gruppi` (
 
 INSERT INTO `appartenenze_gruppi` (`IdGruppo`, `IdAccount`) VALUES
 (1, 6),
+(1, 9),
+(1, 10),
+(9, 9),
+(9, 10),
+(9, 11),
 (13, 6),
+(13, 9),
+(13, 10),
+(13, 11),
 (14, 6),
 (14, 7),
-(1, 9),
-(9, 9),
-(13, 9),
-(1, 10),
-(9, 10),
-(13, 10),
-(14, 10),
-(9, 11),
-(13, 11);
+(14, 10);
 
 -- --------------------------------------------------------
 
@@ -97,28 +97,28 @@ INSERT INTO `categorizzazioni_video` (`IdEtichetta`, `IdVideo`) VALUES
 (1, 3),
 (1, 4),
 (1, 5),
-(2, 6),
-(4, 8),
-(6, 9),
-(14, 9),
-(11, 11),
-(14, 11),
-(10, 12),
-(11, 13),
-(13, 13),
-(9, 21),
 (1, 22),
+(2, 6),
+(2, 28),
 (3, 23),
 (3, 24),
+(4, 8),
 (5, 25),
-(6, 25),
 (5, 26),
-(8, 26),
+(6, 9),
+(6, 25),
 (6, 27),
+(8, 26),
 (8, 27),
+(8, 28),
+(9, 21),
+(10, 12),
+(11, 11),
+(11, 13),
+(13, 13),
 (13, 27),
-(2, 28),
-(8, 28);
+(14, 9),
+(14, 11);
 
 -- --------------------------------------------------------
 
@@ -155,7 +155,7 @@ CREATE TABLE `commenti` (
   `IdCommento` int(11) NOT NULL,
   `IdAccount` int(11) NOT NULL,
   `TestoCommento` varchar(200) NOT NULL,
-  `DataCommento` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DataCommento` datetime NOT NULL DEFAULT current_timestamp(),
   `IdPost` int(11) DEFAULT NULL,
   `IdVideo` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -188,53 +188,55 @@ CREATE TABLE `composizioni_playlists` (
 
 INSERT INTO `composizioni_playlists` (`IdVideo`, `IdPlaylist`) VALUES
 (3, 1),
-(4, 1),
-(5, 1),
-(6, 1),
-(11, 1),
-(21, 1),
-(25, 1),
-(4, 2),
-(11, 2),
 (3, 3),
-(4, 3),
-(21, 3),
-(23, 3),
-(24, 3),
-(27, 3),
 (3, 4),
-(4, 4),
 (3, 5),
 (3, 6),
 (3, 7),
+(3, 15),
+(3, 17),
+(4, 1),
+(4, 2),
+(4, 3),
+(4, 4),
 (4, 7),
-(5, 7),
-(6, 7),
-(8, 7),
-(9, 7),
-(11, 7),
-(12, 7),
-(13, 7),
-(21, 7),
-(22, 7),
 (4, 8),
+(4, 17),
+(5, 1),
+(5, 7),
 (5, 8),
+(5, 17),
+(6, 1),
+(6, 7),
 (6, 8),
-(21, 8),
-(22, 8),
 (6, 9),
 (6, 10),
 (6, 11),
 (6, 12),
-(3, 15),
 (6, 15),
 (6, 16),
-(3, 17),
-(4, 17),
-(5, 17),
+(8, 7),
+(9, 7),
+(11, 1),
+(11, 2),
+(11, 7),
+(12, 7),
+(13, 7),
+(21, 1),
+(21, 3),
+(21, 7),
+(21, 8),
+(22, 7),
+(22, 8),
 (22, 17),
+(23, 3),
 (23, 18),
-(24, 18);
+(24, 3),
+(24, 18),
+(25, 1),
+(27, 3),
+(28, 7),
+(28, 8);
 
 -- --------------------------------------------------------
 
@@ -297,7 +299,7 @@ INSERT INTO `gruppi` (`IdGruppo`, `NomeGruppo`) VALUES
 CREATE TABLE `iscrizioni` (
   `IdCanale` int(11) NOT NULL,
   `IdIscritto` int(11) NOT NULL,
-  `DataIscrizione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP
+  `DataIscrizione` datetime NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -321,7 +323,7 @@ INSERT INTO `iscrizioni` (`IdCanale`, `IdIscritto`, `DataIscrizione`) VALUES
 CREATE TABLE `messaggi` (
   `IdMessaggio` int(11) NOT NULL,
   `TestoMessaggio` varchar(200) NOT NULL,
-  `DataInvio` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DataInvio` datetime NOT NULL DEFAULT current_timestamp(),
   `IdChat` int(11) DEFAULT NULL,
   `IdGruppo` int(11) DEFAULT NULL,
   `IdAccount` int(11) NOT NULL
@@ -349,7 +351,9 @@ INSERT INTO `messaggi` (`IdMessaggio`, `TestoMessaggio`, `DataInvio`, `IdChat`, 
 (42, 'Ciao', '2022-06-21 11:32:59', NULL, 14, 6),
 (43, 'Chi tifate nella partita di stasera?', '2022-06-21 11:33:23', NULL, 14, 6),
 (44, 'Roma, ovviamente', '2022-06-21 11:33:42', NULL, 14, 7),
-(45, 'Io Lazio invece', '2022-06-21 11:35:08', NULL, 14, 10);
+(45, 'Io Lazio invece', '2022-06-21 11:35:08', NULL, 14, 10),
+(46, 'Ciao ema', '2022-06-21 11:58:24', 2, NULL, 9),
+(47, 'Belli i nuovi video :)', '2022-06-21 11:58:33', 2, NULL, 9);
 
 -- --------------------------------------------------------
 
@@ -396,7 +400,7 @@ INSERT INTO `playlists` (`IdPlaylist`, `Pubblica`, `NomePlaylist`, `TipoPlaylist
 CREATE TABLE `post_scritti` (
   `IdPost` int(11) NOT NULL,
   `Titolo` varchar(40) NOT NULL,
-  `DataPubblicazione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `DataPubblicazione` datetime NOT NULL DEFAULT current_timestamp(),
   `TestoPost` varchar(400) NOT NULL,
   `IdAccount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -409,7 +413,8 @@ INSERT INTO `post_scritti` (`IdPost`, `Titolo`, `DataPubblicazione`, `TestoPost`
 (9, 'Questo è un post scritto', '2022-06-20 21:32:12', 'E qui posso scrivere qualunque cosa', 9),
 (10, 'Novità!!!', '2022-06-21 11:42:25', 'Ho pubblicato nuovi video per gli amanti dei viaggi.', 6),
 (11, 'Tutti a tifare Roma!', '2022-06-21 11:49:12', 'Forza Roma sempre', 7),
-(12, 'Visitate il mio canale', '2022-06-21 11:50:49', 'Nel mio canale troverete tanti bellissimi video per voi!\r\n;)', 7);
+(12, 'Visitate il mio canale', '2022-06-21 11:50:49', 'Nel mio canale troverete tanti bellissimi video per voi!\r\n;)', 7),
+(13, 'Hey!', '2022-06-21 12:11:40', 'Guardate tutti la mia nuova playlist Musica, con dentro alcune canzoni bellissime :D', 9);
 
 -- --------------------------------------------------------
 
@@ -421,9 +426,9 @@ CREATE TABLE `video` (
   `IdVideo` int(11) NOT NULL,
   `Titolo` varchar(100) NOT NULL,
   `SorgenteVideo` varchar(300) NOT NULL,
-  `DataPubblicazione` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `NumeroLike` int(11) NOT NULL DEFAULT '0',
-  `NumeroVisualizzazioni` int(11) NOT NULL DEFAULT '0',
+  `DataPubblicazione` datetime NOT NULL DEFAULT current_timestamp(),
+  `NumeroLike` int(11) NOT NULL DEFAULT 0,
+  `NumeroVisualizzazioni` int(11) NOT NULL DEFAULT 0,
   `IdAccount` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -448,7 +453,7 @@ INSERT INTO `video` (`IdVideo`, `Titolo`, `SorgenteVideo`, `DataPubblicazione`, 
 (25, '2 settimane in Italia', '4Pcv-66-dR8', '2022-06-21 11:41:07', 0, 1, 6),
 (26, 'Cose da sapere prima di visitare Malta', 'Mka4AjU4vrc', '2022-06-21 11:41:44', 0, 0, 6),
 (27, 'Roma food tour', '5SJlbeGeJ4w', '2022-06-21 11:44:32', 0, 1, 7),
-(28, '15 curiosità sui cani', 'RtW2Uc1ZpdY', '2022-06-21 11:47:48', 0, 0, 6);
+(28, '15 curiosità sui cani', 'RtW2Uc1ZpdY', '2022-06-21 11:47:48', 1, 1, 6);
 
 -- --------------------------------------------------------
 
@@ -492,6 +497,7 @@ INSERT INTO `visualizzazioni` (`IdAccount`, `IdVideo`, `TempoVisualizzazione`) V
 (9, 13, 0),
 (9, 21, 21),
 (9, 22, 74),
+(9, 28, 5),
 (10, 6, 40),
 (11, 6, 0);
 
@@ -637,7 +643,7 @@ ALTER TABLE `gruppi`
 -- AUTO_INCREMENT per la tabella `messaggi`
 --
 ALTER TABLE `messaggi`
-  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `IdMessaggio` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT per la tabella `playlists`
@@ -649,7 +655,7 @@ ALTER TABLE `playlists`
 -- AUTO_INCREMENT per la tabella `post_scritti`
 --
 ALTER TABLE `post_scritti`
-  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `IdPost` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT per la tabella `video`
