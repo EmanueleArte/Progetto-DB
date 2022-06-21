@@ -83,7 +83,7 @@
               $risC=$query->fetchAll();
               echo '<div class="row ml-2"><p>Etichette: ';
               foreach($risC as $etichetta) {
-                echo '<span onclick="location.href=\'etichette.php?etichetta='.$etichetta["NomeEtichetta"].'\'" class="badge badge-pill badge-success mr-1">'. $etichetta["NomeEtichetta"] .'</span>';
+                echo '<span onclick="location.href=\'etichette.php?etichetta='.$etichetta["NomeEtichetta"].'\'" class="badge badge-pill badge-success mr-1" style="cursor: pointer">'. $etichetta["NomeEtichetta"] .'</span>';
               }
               echo '</p>';
             }
