@@ -45,9 +45,9 @@
             $query=$db->prepare($sql);
             $query->execute();
             $risAltro=$query->fetch();
-            echo '<div class="card m-3" style="width: 16rem;">
-                    <div class="card-body" onclick="location.href=\'chat.php?chatID='.$row["IdChat"].'\'">
-                      <h5 class="card-title">'.$risAltro["Username"].'</h5>
+            echo '<div class="card card-post m-3" style="width: 16rem;">
+                    <div class="card-body card-post" onclick="location.href=\'chat.php?chatID='.$row["IdChat"].'\'">
+                      <h5 class="card-title card-post">'.$risAltro["Username"].'</h5>
                     </div>
                   </div>';
           }
@@ -72,9 +72,9 @@
             $query=$db->prepare($sql);
             $query->execute();
             $risAltro=$query->fetch();
-            echo '<div class="card m-3" style="width: 16rem;">
-                    <div class="card-body" onclick="location.href=\'chat.php?groupID='.$row["IdGruppo"].'\'">
-                      <h5 class="card-title">'.$risAltro["NomeGruppo"].'</h5>
+            echo '<div class="card card-post m-3" style="width: 16rem;">
+                    <div class="card-body card-post" onclick="location.href=\'chat.php?groupID='.$row["IdGruppo"].'\'">
+                      <h5 class="card-title card-post">'.$risAltro["NomeGruppo"].'</h5>
                     </div>
                   </div>';
             }
